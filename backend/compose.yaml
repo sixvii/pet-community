@@ -1,0 +1,99 @@
+services:
+  mongodb:
+    image: mongo:8
+    restart: unless-stopped
+    env_file:
+      - ./php-api/.env
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:?Set MONGODB_DATABASE in php-api/.env}
+    volumes:
+      - mongo_data:/data/db
+      - ./mongodb/init-app-user.js:/docker-entrypoint-initdb.d/01-create-app-user.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  php-api:
+    build: ./php-api
+    restart: unless-stopped
+    env_file:
+      - ./php-api/.env
+    environment:
+      MONGODB_URI: ${MONGODB_URI:?Set MONGODB_URI in php-api/.env}
+      APP_ENV: ${APP_ENV:-production}
+      APP_ORIGIN: ${APP_ORIGIN:?Set APP_ORIGIN in php-api/.env}
+    expose:
+      - "80"
+    ports:
+      - "127.0.0.1:${PHP_API_PORT:-8080}:80"
+    volumes:
+      - php_sessions:/var/lib/php/sessions
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "php",
+          "-r",
+          "exit(@file_get_contents('http://127.0.0.1/api/health') === false ? 1 : 0);",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  reminder-worker:
+    build: ./php-api
+    restart: unless-stopped
+    command: ["php", "/app/bin/reminder-worker.php"]
+    env_file:
+      - ./php-api/.env
+    environment:
+      MONGODB_URI: ${MONGODB_URI:?Set MONGODB_URI in php-api/.env}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  realtime-node:
+    build: ./realtime-node
+    restart: unless-stopped
+    env_file:
+      - ./realtime-node/.env
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      PORT: 3001
+      CLIENT_ORIGINS: ${APP_ORIGIN:?Set APP_ORIGIN in php-api/.env}
+      PHP_API_INTERNAL_URL: http://php-api
+    expose:
+      - "3001"
+    ports:
+      - "127.0.0.1:${REALTIME_PORT:-3001}:3001"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3001/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build: ../frontend
+    restart: unless-stopped
+    ports:
+      - "${PAWLY_BIND_ADDRESS:-127.0.0.1}:${PAWLY_PORT:-8081}:80"
+    depends_on:
+      php-api:
+        condition: service_healthy
+      realtime-node:
+        condition: service_healthy
+
+volumes:
+  mongo_data:
+  php_sessions:

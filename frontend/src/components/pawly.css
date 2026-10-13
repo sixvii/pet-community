@@ -1,0 +1,6885 @@
+@import url("https://fonts.cdnfonts.com/css/circular-std");
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --font-circular: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+  --font-poppins: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+body {
+  background: #191919;
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.pawly-initial-loading {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #191919;
+}
+.pawly-page-loading,
+.pawly-feed-loading {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+}
+.pawly-feed-loading {
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 10px;
+  color: var(--pawly-muted);
+}
+.pawly-loading-indicator,
+.pawly-page-loading::after,
+.pawly-initial-loading::after {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--pawly-border-strong, rgba(255, 255, 255, 0.18));
+  border-top-color: var(--pawly-accent, #dce7b8);
+  border-radius: 50%;
+  animation: pawly-loading-spin 700ms linear infinite;
+}
+@keyframes pawly-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pawly-loading-indicator,
+  .pawly-page-loading::after,
+  .pawly-initial-loading::after {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #1d9bf0;
+  outline-offset: 3px;
+}
+
+.pawly-skip-link {
+  position: fixed;
+  z-index: 10000;
+  top: 10px;
+  left: 10px;
+  transform: translateY(-150%);
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #1d9bf0;
+  color: #fff;
+  font-weight: 700;
+}
+.pawly-skip-link:focus {
+  transform: translateY(0);
+}
+
+.pawly-community-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: var(--pawly-text);
+}
+.pawly-community-heading,
+.pawly-community-card,
+.pawly-community-form {
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  background: var(--pawly-card);
+}
+.pawly-community-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+}
+.pawly-community-heading h1,
+.pawly-community-form h2,
+.pawly-community-card h3 {
+  margin: 0;
+}
+.pawly-community-heading p {
+  margin: 4px 0 0;
+  color: var(--pawly-muted);
+}
+.pawly-community-language,
+.pawly-community-form label,
+.pawly-community-card > label {
+  display: grid;
+  gap: 6px;
+  color: var(--pawly-secondary-text);
+  font-size: 13px;
+}
+.pawly-community-language select,
+.pawly-community-form input,
+.pawly-community-form select,
+.pawly-community-form textarea,
+.pawly-community-card input {
+  min-width: 0;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: var(--pawly-card-deep);
+  color: var(--pawly-text);
+  font: inherit;
+}
+.pawly-community-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-community-tabs button {
+  flex: 0 0 auto;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font: inherit;
+  cursor: pointer;
+}
+.pawly-community-tabs button[aria-selected="true"] {
+  border-bottom-color: #1d9bf0;
+  color: var(--pawly-text);
+}
+.pawly-community-panel,
+.pawly-community-list {
+  display: grid;
+  gap: 14px;
+}
+.pawly-community-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  padding: 0 12px;
+  color: var(--pawly-muted);
+}
+.pawly-community-search input {
+  width: 100%;
+  border: 0;
+  padding: 12px 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font: inherit;
+}
+.pawly-community-form {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+.pawly-community-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.pawly-community-form textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+.pawly-community-wide {
+  grid-column: 1 / -1;
+}
+.pawly-community-card {
+  display: grid;
+  gap: 9px;
+  padding: 16px;
+}
+.pawly-community-card > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--pawly-secondary-text);
+}
+.pawly-community-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.pawly-community-card p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.pawly-community-card a {
+  width: fit-content;
+  color: #1d9bf0;
+}
+.pawly-community-status {
+  width: fit-content;
+  border-radius: 20px;
+  padding: 3px 9px;
+  background: var(--pawly-card-deep);
+  font-size: 12px;
+}
+.pawly-community-status.lost {
+  color: #ffadad;
+}
+.pawly-community-status.found {
+  color: #8de0b0;
+}
+.pawly-community-image {
+  max-width: 100%;
+  max-height: 340px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.pawly-community-overlay {
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.72);
+}
+.pawly-community-overlay > form {
+  width: min(100%, 620px);
+}
+.pawly-availability-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pawly-availability-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--pawly-border);
+  padding: 8px 0;
+}
+
+@media (max-width: 560px) {
+  .pawly-community-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .pawly-community-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pawly-community-wide {
+    grid-column: auto;
+  }
+}
+
+.pawly-app {
+  --pawly-bg: #191919;
+  --pawly-card: #191919;
+  --pawly-card-deep: #191919;
+  --pawly-border: rgba(255, 255, 255, 0.1);
+  --pawly-border-strong: rgba(255, 255, 255, 0.18);
+  --pawly-text: #f7f7f7;
+  --pawly-secondary-text: #bcbcbc;
+  --pawly-muted: #929292;
+  --pawly-subtle: #686868;
+  --pawly-accent: #dce7b8;
+  --pawly-logo-fill: #000;
+  --pawly-logo-stroke: #222;
+  --pawly-logo-gradient-start: #fff;
+  --pawly-logo-gradient-end: #5f5f5f;
+  display: grid;
+  grid-template-columns: 56px 376px minmax(0, 1fr);
+  width: 100%;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--pawly-bg);
+  color: var(--pawly-text);
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.pawly-app.is-light {
+  --pawly-bg: #f8f9fa;
+  --pawly-card: #ffffff;
+  --pawly-card-deep: #f1f3f5;
+  --pawly-border: rgba(28, 28, 28, 0.12);
+  --pawly-border-strong: rgba(28, 28, 28, 0.22);
+  --pawly-text: #1c1c1c;
+  --pawly-secondary-text: #454b52;
+  --pawly-muted: #626b76;
+  --pawly-subtle: #707984;
+  --pawly-accent: #526a2c;
+  --pawly-logo-fill: #222;
+  --pawly-logo-stroke: #fff;
+  --pawly-logo-gradient-start: #333;
+  --pawly-logo-gradient-end: #aaa;
+}
+
+.pawly-feed-column {
+  border-color: var(--pawly-border);
+}
+
+.pawly-app * {
+  box-sizing: border-box;
+}
+.pawly-app button,
+.pawly-app input,
+.pawly-app textarea,
+.pawly-app select {
+  font: inherit;
+}
+.pawly-app button {
+  color: inherit;
+}
+.pawly-app button:focus-visible,
+.pawly-app input:focus-visible,
+.pawly-app textarea:focus-visible,
+.pawly-app select:focus-visible {
+  outline: 2px solid var(--pawly-accent);
+  outline-offset: 3px;
+}
+.pawly-rail {
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid var(--pawly-border);
+  background: var(--pawly-card);
+  padding: 18px 5px 16px;
+}
+.pawly-brand-mark,
+.pawly-rail-button,
+.pawly-rail-profile,
+.pawly-icon-button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.pawly-brand-mark {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 27px;
+  border-radius: 13px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-rail-logo {
+  width: 26px;
+  height: 27px;
+}
+.pawly-rail-links {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pawly-rail-button {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--pawly-muted);
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease;
+}
+.pawly-rail-button:hover {
+  color: var(--pawly-text);
+  background: var(--pawly-card);
+}
+.pawly-rail-button.is-active {
+  border-color: var(--pawly-border);
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+}
+.pawly-nav-image-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  filter: invert(1);
+  object-fit: contain;
+}
+.pawly-app.is-light .pawly-nav-image-icon {
+  filter: none;
+}
+.pawly-unread-dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pawly-accent);
+}
+.pawly-rail-profile {
+  padding: 0;
+  border-radius: 50%;
+}
+.pawly-avatar {
+  display: block;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pawly-card);
+}
+.pawly-avatar-large {
+  width: 84px;
+  height: 84px;
+  border: 1px solid #424242;
+}
+.pawly-avatar-fallback {
+  display: grid;
+  place-items: center;
+  color: var(--pawly-text);
+  font-weight: 600;
+}
+.pawly-context {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--pawly-border);
+  background: var(--pawly-card);
+}
+.pawly-context-mobile-head {
+  display: none;
+}
+.pawly-identity {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 19px 23px;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  cursor: pointer;
+}
+.pawly-identity-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+}
+.pawly-identity-copy strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-identity-copy > span {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-identity-menu {
+  position: absolute;
+  top: 20px;
+  right: 19px;
+  color: var(--pawly-muted);
+  font-size: 22px;
+  line-height: 1;
+}
+.pawly-context-section {
+  padding: 23px 13px;
+}
+.pawly-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7px 11px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pawly-section-label span:last-child {
+  color: var(--pawly-subtle);
+}
+.pawly-pets-section-label {
+  justify-content: center;
+  font-size: 12.5px;
+}
+.pawly-pet-list {
+  max-height: min(34vh, 300px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.pawly-pet-list::-webkit-scrollbar {
+  display: none;
+}
+.pawly-pet-row {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  margin: 8px 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
+}
+.pawly-pet-row:hover,
+.pawly-pet-row.is-selected {
+  border-color: var(--pawly-border-strong);
+  background: var(--pawly-card);
+}
+.pawly-pet-thumb {
+  display: block;
+  width: 100%;
+  height: 150px;
+  flex: 0 0 auto;
+  object-fit: cover;
+}
+.pawly-pet-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 40px 10px 12px;
+}
+.pawly-pet-copy strong {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-pet-copy span {
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-selected-mark {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  color: var(--pawly-accent);
+}
+.pawly-add-pet {
+  display: flex;
+  width: fit-content;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  padding: 7px 13px;
+  border: 1px solid #424242;
+  border-radius: 9px;
+  background: #2a2a2a;
+  color: var(--pawly-text) !important;
+  cursor: pointer;
+}
+.pawly-add-pet img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.pawly-app.is-light .pawly-add-pet {
+  border-color: #424242;
+  background: #fff;
+  color: #000 !important;
+}
+.pawly-app.is-light .pawly-add-pet img {
+  filter: brightness(0);
+}
+.pawly-app.is-light .pawly-add-pet:hover {
+  color: #000 !important;
+}
+.pawly-add-pet:hover,
+.pawly-text-link:hover {
+  color: var(--pawly-accent) !important;
+}
+.pawly-muted {
+  margin: 8px 6px;
+  color: var(--pawly-muted);
+}
+.pawly-context-section > .pawly-muted {
+  font-size: 12.5px;
+  text-align: center;
+}
+.pawly-business-switcher {
+  padding: 0 13px 20px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-business-switcher > .pawly-section-label {
+  font-size: 12.5px;
+}
+.pawly-business-switcher > button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 8px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: #3c3c3c;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-business-avatar {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+.pawly-business-switcher button > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-business-switcher strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-business-switcher small {
+  color: #bcbcbc;
+  font-size: 14.5px;
+}
+.pawly-business-switcher button > svg {
+  color: #bcbcbc;
+}
+.pawly-workspace {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  background: var(--pawly-card);
+}
+.pawly-page-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 0 9px;
+}
+.pawly-page-kicker {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.pawly-pet-profile-title h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+.pawly-icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--pawly-secondary-text);
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+.pawly-icon-button:hover {
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+}
+.pawly-welcome-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 17px 0 0;
+  padding: 15px 17px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  background: var(--pawly-card);
+}
+.pawly-welcome-strip > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pawly-welcome-strip strong {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-welcome-strip span:not(.pawly-welcome-paw) {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-welcome-paw {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-feed-tabs {
+  display: flex;
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  flex: 0 0 48px;
+  flex-shrink: 0;
+  margin: 0 -32px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--pawly-border);
+  background: var(--pawly-card);
+}
+.pawly-feed-tabs button {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 15px;
+  cursor: pointer;
+}
+.pawly-feed-tabs button.is-selected {
+  color: var(--pawly-text);
+  font-weight: 600;
+}
+.pawly-feed-tabs button.is-selected::after {
+  position: absolute;
+  right: 128px;
+  bottom: 0;
+  left: 128px;
+  height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: #1d9bf0;
+  content: "";
+}
+.pawly-feed-tabs.pawly-follow-tabs button.is-selected::after {
+  right: 25%;
+  left: 25%;
+}
+.pawly-follow-tabs button span {
+  margin-left: 6px;
+  color: var(--pawly-muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+.pawly-feed-tabs .pawly-feed-create-button {
+  width: 56px;
+  flex: 0 0 56px;
+  color: var(--pawly-muted);
+}
+.pawly-feed-tabs .pawly-feed-create-button:hover {
+  color: var(--pawly-text);
+}
+.pawly-follow-button {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 4px 9px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pawly-follow-button:hover {
+  border-color: var(--pawly-accent);
+}
+.pawly-follow-button.is-following {
+  border-color: var(--pawly-border);
+  color: var(--pawly-muted);
+}
+@media (min-width: 701px) and (max-width: 980px) {
+  .pawly-feed-column {
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 20px 24px 45px;
+    border-right: 0;
+    border-left: 0;
+  }
+  .pawly-feed-tabs {
+    margin-right: -24px;
+    margin-left: -24px;
+  }
+}
+.pawly-following-empty {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  text-align: center;
+}
+.pawly-following-empty > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-following-empty strong {
+  font-size: 14.5px;
+}
+.pawly-following-empty p {
+  max-width: 275px;
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-following-empty button {
+  margin-top: 4px;
+  padding: 7px 11px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-followers-heading {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 14px 0 16px;
+}
+.pawly-followers-heading h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+}
+.pawly-followers-heading > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-follower-row {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-follower-details {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-follower-details strong {
+  overflow: hidden;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-follower-details span {
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-follower-row .pawly-follow-button {
+  margin-left: auto;
+}
+.pawly-followers-error,
+.pawly-followers-empty {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-followers-error button {
+  padding: 7px 11px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  cursor: pointer;
+}
+.pawly-followers-empty > svg {
+  color: var(--pawly-accent);
+}
+.pawly-followers-empty strong {
+  color: var(--pawly-text);
+}
+.pawly-post-card {
+  padding: 26px 0 24px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pawly-post-author {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.pawly-post-author > div {
+  display: flex;
+  min-width: 0;
+  grid-column: 1;
+  grid-row: 1;
+  align-items: center;
+  gap: 4px;
+}
+.pawly-post-author strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-post-author > span {
+  grid-column: 1;
+  grid-row: 2;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-post-time {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  color: var(--pawly-subtle);
+  font-size: 14.5px;
+}
+@media (min-width: 701px) {
+  .pawly-post-author {
+    width: fit-content;
+    flex: 0 1 auto;
+    grid-template-columns: max-content max-content;
+  }
+}
+.pawly-verified,
+.pawly-verified-badge {
+  flex: 0 0 auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pawly-verified-badge {
+  border-radius: 50%;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.pawly-post-menu {
+  margin-left: 0;
+}
+.pawly-post-text {
+  margin: 13px 0 14px;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.pawly-post-media {
+  display: block;
+  width: min(100%, 320px);
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  background: var(--pawly-card);
+  line-height: 0;
+  cursor: pointer;
+}
+.pawly-post-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(84vh, 656px);
+  object-fit: contain;
+}
+.pawly-post-media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  margin: 12px 0;
+}
+.pawly-post-media-grid.is-single {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(100%, 320px);
+}
+.pawly-post-media-grid.is-single .pawly-post-media-grid-image,
+.pawly-post-media-grid.is-single > video {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: min(84vh, 656px);
+  object-fit: contain;
+  border-radius: 12px;
+}
+.pawly-post-media-grid-image,
+.pawly-post-media-grid > video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border);
+  border-radius: 8px;
+  background: var(--pawly-card);
+  object-fit: cover;
+}
+.pawly-post-media-grid-image {
+  padding: 0;
+  cursor: pointer;
+}
+.pawly-post-media-grid.is-single .pawly-post-media-grid-image {
+  aspect-ratio: auto;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+}
+.pawly-post-media-grid-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pawly-post-media-grid.is-single .pawly-post-media-grid-image img {
+  height: auto;
+  max-height: min(84vh, 656px);
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  object-fit: contain;
+}
+.pawly-post-video {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  max-height: min(84vh, 656px);
+  margin-top: 12px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  background: var(--pawly-card);
+  object-fit: contain;
+}
+.pawly-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 11px;
+}
+.pawly-post-primary-actions {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 150px;
+}
+.pawly-post-actions button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: color 140ms ease;
+}
+.pawly-post-action-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.pawly-app.is-light .pawly-post-action-icon {
+  filter: none;
+}
+.pawly-post-actions button:hover {
+  color: var(--pawly-text);
+}
+.pawly-post-actions button.is-liked {
+  color: #e9a8aa;
+}
+.pawly-post-actions button.is-liked .pawly-post-action-icon {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(16%) saturate(1205%) hue-rotate(296deg) brightness(97%) contrast(91%);
+}
+.pawly-app.is-light .pawly-post-actions button.is-liked .pawly-post-action-icon {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(15%) saturate(1124%) hue-rotate(296deg) brightness(95%) contrast(91%);
+}
+.pawly-post-actions button.is-saved {
+  color: var(--pawly-accent);
+}
+.pawly-post-actions .pawly-save-action {
+  margin-left: auto;
+}
+.pawly-inline-comments {
+  margin-top: 11px;
+  padding: 11px 12px 4px;
+  border-radius: 10px;
+  background: var(--pawly-card);
+}
+.pawly-post-comments-heading {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  margin: 0 0 12px;
+}
+.pawly-post-comments-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font: inherit;
+  cursor: pointer;
+}
+.pawly-post-comments-back svg {
+  transform: rotate(180deg);
+}
+.pawly-post-comments-list {
+  display: grid;
+  gap: 16px;
+  padding: 17px 0;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-post-comments-list h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.pawly-post-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.pawly-post-comment > div {
+  min-width: 0;
+  flex: 1;
+}
+.pawly-post-comment-author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+.pawly-post-comment-author span,
+.pawly-post-comment-author time {
+  color: var(--pawly-muted);
+  font-size: 12px;
+}
+.pawly-post-comment p {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+  color: var(--pawly-secondary-text);
+}
+.pawly-post-comments-empty {
+  margin: 0;
+  color: var(--pawly-muted);
+}
+.pawly-post-comment-form {
+  position: sticky;
+  z-index: 4;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 -16px;
+  padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--pawly-border);
+  border-bottom: 1px solid var(--pawly-border);
+  background: var(--pawly-bg);
+}
+.pawly-post-comment-form textarea {
+  min-height: 40px;
+  max-height: 140px;
+  min-width: 0;
+  flex: 1;
+  resize: vertical;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 12px;
+  padding: 9px 12px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font: inherit;
+}
+.pawly-post-comment-form > button {
+  display: grid;
+  width: 48px;
+  min-height: 40px;
+  place-items: center;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 14px;
+  background: var(--pawly-accent);
+  color: #191919;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pawly-post-comment-form > button .pawly-post-send-icon {
+  width: 22px;
+  height: 22px;
+}
+.pawly-post-comment-form > button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.pawly-comment-sample {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pawly-comment-sample .pawly-avatar {
+  width: 27px;
+  height: 27px;
+}
+.pawly-comment-sample p {
+  margin: 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-comment-sample p strong {
+  margin-right: 5px;
+  color: var(--pawly-text);
+}
+.pawly-inline-comments form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-inline-comments input {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  outline: none;
+}
+.pawly-inline-comments form button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-accent);
+  cursor: pointer;
+}
+.pawly-comment-signin {
+  margin: 8px 0 0;
+  padding: 9px 0 4px;
+  border-top: 1px solid var(--pawly-border);
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-provider-section {
+  padding: 19px 0 21px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-provider-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.pawly-provider-heading h2,
+.pawly-subheading {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.pawly-provider-heading > div > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-empty-country {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-provider-heading button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-provider-heading button:hover {
+  color: var(--pawly-text);
+}
+.pawly-provider-scroller {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.pawly-provider-card {
+  position: relative;
+  flex: 0 0 205px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 11px;
+  background: var(--pawly-card);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  scroll-snap-align: start;
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+.pawly-provider-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.28);
+}
+.pawly-provider-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-provider-cover {
+  display: block;
+  width: 100%;
+  height: 94px;
+  object-fit: cover;
+}
+.pawly-provider-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 11px 11px;
+}
+.pawly-provider-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  font-size: 14.5px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-provider-type {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-provider-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 3px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-provider-meta > span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+.pawly-provider-meta svg:first-child {
+  color: var(--pawly-accent);
+}
+.pawly-provider-price {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-feed-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 27px 0;
+  color: #656565;
+  font-size: 14.5px;
+}
+.pawly-feed-end span {
+  width: 32px;
+  height: 1px;
+  background: var(--pawly-card);
+}
+.pawly-auth-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 35px 21px 20px;
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 400;
+}
+.pawly-auth-brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pawly-auth-heading {
+  margin: 39px 0 21px;
+}
+.pawly-auth-heading h1 {
+  margin: 0 0 5px;
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.pawly-auth-heading p {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-google-button {
+  display: flex;
+  width: 100%;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-google-button:hover {
+  background: var(--pawly-card);
+}
+.pawly-google-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+.pawly-signup-role-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0 0 14px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 400;
+}
+.pawly-signup-role-picker > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pawly-signup-role-picker button {
+  min-height: 40px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-signup-role-picker button.is-selected {
+  border-color: var(--pawly-text);
+  background: var(--pawly-card-deep);
+  color: var(--pawly-text);
+}
+.pawly-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 17px 0;
+  color: #747474;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-auth-divider::before,
+.pawly-auth-divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--pawly-card);
+  content: "";
+}
+.pawly-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.pawly-auth-form label,
+.pawly-pet-modal form > label,
+.pawly-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 400;
+}
+.pawly-auth-form input,
+.pawly-auth-form select,
+.pawly-pet-modal input,
+.pawly-pet-modal select {
+  width: 100%;
+  height: 39px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 400;
+}
+.pawly-auth-panel .pawly-auth-form input,
+.pawly-auth-panel .pawly-auth-form select {
+  height: 48px;
+  border-color: #424242;
+  font-weight: 400;
+}
+.pawly-auth-panel .pawly-auth-form input:focus,
+.pawly-auth-panel .pawly-auth-form input:focus-visible,
+.pawly-auth-panel .pawly-auth-form select:focus,
+.pawly-auth-panel .pawly-auth-form select:focus-visible {
+  border-color: #424242;
+  outline: none;
+}
+.pawly-auth-panel .pawly-auth-form input:-webkit-autofill,
+.pawly-auth-panel .pawly-auth-form input:-webkit-autofill:hover,
+.pawly-auth-panel .pawly-auth-form input:-webkit-autofill:focus,
+.pawly-auth-panel .pawly-auth-form input:-webkit-autofill:active,
+.pawly-auth-panel .pawly-auth-form input:autofill {
+  -webkit-text-fill-color: var(--pawly-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--pawly-card) inset;
+  box-shadow: 0 0 0 1000px var(--pawly-card) inset;
+  transition: background-color 9999s ease-out;
+}
+.pawly-password-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pawly-auth-form .pawly-password-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.pawly-password-toggle input[type="checkbox"] {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+}
+.pawly-password-toggle input[type="checkbox"]:checked {
+  border-color: #bdbdbd;
+  background: transparent;
+}
+.pawly-password-toggle input[type="checkbox"]:checked::after {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 6px;
+  height: 11px;
+  transform: rotate(45deg);
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  content: "";
+}
+.pawly-app.is-light .pawly-password-toggle input[type="checkbox"]:checked::after {
+  border-color: #000;
+}
+.pawly-auth-form input::placeholder,
+.pawly-pet-modal input::placeholder {
+  color: #626262;
+}
+.pawly-auth-name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+.pawly-text-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-forgot {
+  align-self: flex-end;
+  margin-top: -5px;
+}
+.pawly-primary-button,
+.pawly-secondary-button {
+  display: inline-flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease;
+}
+.pawly-primary-button {
+  border-color: var(--pawly-border-strong);
+  background: var(--pawly-card);
+  color: var(--pawly-text) !important;
+}
+.pawly-primary-button:hover {
+  background: var(--pawly-card);
+}
+.pawly-auth-form .pawly-primary-button {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 2px;
+}
+.pawly-secondary-button {
+  border-color: var(--pawly-border-strong);
+  background: transparent;
+  color: var(--pawly-text) !important;
+}
+.pawly-secondary-button:hover {
+  background: var(--pawly-card);
+}
+.pawly-auth-switch {
+  margin: 16px 0 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-align: left;
+}
+.pawly-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 23px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-demo-actions > span {
+  width: 100%;
+  margin-bottom: 2px;
+  color: #777;
+  font-size: 14.5px;
+}
+.pawly-demo-actions button {
+  flex: 1;
+  min-width: 90px;
+  min-height: 33px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-demo-actions button:hover,
+.pawly-demo-actions a:hover {
+  border-color: var(--pawly-border-strong);
+  background: var(--pawly-card);
+}
+.pawly-demo-actions a {
+  display: grid;
+  min-width: 90px;
+  min-height: 33px;
+  flex: 1;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  text-decoration: none;
+}
+.pawly-mobile-header,
+.pawly-mobile-nav {
+  display: none;
+}
+.pawly-photo-lightbox {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+}
+.pawly-photo-lightbox figure {
+  display: flex;
+  width: min(100%, 1100px);
+  max-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+.pawly-photo-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: min(82dvh, 1000px);
+  border-radius: 9px;
+  object-fit: contain;
+}
+.pawly-photo-lightbox figcaption {
+  max-width: 620px;
+  color: #f7f7f7;
+  font-size: 14.5px;
+  text-align: center;
+}
+.pawly-photo-close {
+  position: absolute;
+  top: max(18px, env(safe-area-inset-top));
+  right: max(18px, env(safe-area-inset-right));
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(28, 28, 28, 0.8);
+  color: #fff;
+  cursor: pointer;
+}
+.pawly-photo-close:hover {
+  background: #333;
+}
+.pawly-modal-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--pawly-card);
+  backdrop-filter: blur(4px);
+}
+.pawly-modal {
+  width: min(100%, 510px);
+  max-height: min(90dvh, 760px);
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 14px;
+  background: var(--pawly-card);
+  box-shadow: 0 22px 80px rgba(0, 0, 0, 0.5);
+}
+.pawly-modal > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4px 0 16px;
+}
+.pawly-modal > header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+}
+.pawly-feed-composer {
+  margin: 0 0 12px;
+}
+@media (min-width: 981px) {
+  .pawly-feed-composer {
+    position: fixed;
+    z-index: 4;
+    bottom: 28px;
+    left: 56px;
+    width: 376px;
+    margin: 0;
+    padding: 0 12px;
+  }
+  .pawly-app .pawly-post-composer {
+    min-height: 0;
+  }
+  .pawly-app .pawly-post-composer-input {
+    min-height: 0;
+    padding: 22px 18px 16px;
+  }
+  .pawly-app .pawly-post-composer-input > textarea {
+    min-height: 0;
+    font-size: 15px;
+  }
+}
+.pawly-post-composer-form {
+  gap: 0 !important;
+}
+.pawly-post-publish-error {
+  margin: 0 0 8px;
+  color: #ff8c8c;
+  font-size: 13px;
+}
+.pawly-post-composer {
+  display: flex;
+  min-height: 196px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 11px;
+  background: #2a2a2a;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.pawly-post-composer:focus-within {
+  border-color: #424242;
+  box-shadow: none;
+}
+.pawly-post-composer-input {
+  display: flex;
+  min-height: 124px;
+  flex: 1;
+  align-items: flex-start;
+  padding: 20px 24px 10px;
+}
+.pawly-post-composer-input > textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 90px;
+  flex: 1;
+  resize: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.pawly-app.is-light .pawly-post-composer-input > textarea {
+  color: #000;
+}
+.pawly-app.is-light .pawly-post-composer {
+  border-color: #e3e3e3;
+  background: #fff;
+}
+.pawly-app.is-light .pawly-post-composer:focus-within {
+  border-color: #e3e3e3;
+}
+.pawly-post-composer-input > textarea:focus-visible {
+  outline: 0;
+  outline-offset: 0;
+}
+.pawly-post-composer-input > textarea::placeholder {
+  color: var(--pawly-muted);
+}
+.pawly-composer-media-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0 20px 10px;
+}
+.pawly-composer-media-item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid #424242;
+  border-radius: 8px;
+  background: #1b1b1b;
+}
+.pawly-composer-media-item > img,
+.pawly-composer-media-item > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pawly-composer-media-item > button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.8);
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+}
+.pawly-post-composer-toolbar {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 13px 10px 20px;
+}
+.pawly-composer-tool {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  color: var(--pawly-secondary-text);
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+.pawly-composer-tool:hover {
+  background: var(--pawly-border);
+  color: var(--pawly-text);
+}
+.pawly-composer-tool input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pawly-post-pet-select {
+  margin-left: auto;
+  font-size: 12.5px;
+}
+.pawly-post-pet-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 5px 8px;
+  border: 1px dashed var(--pawly-border-strong);
+  border-radius: 6px;
+  background: var(--pawly-bg);
+  color: var(--pawly-text);
+  font-size: 13px;
+}
+.pawly-post-pet-select select:focus,
+.pawly-post-pet-select select:focus-visible {
+  border-color: var(--pawly-border-strong);
+  outline: none;
+}
+.pawly-post-submit {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px dashed var(--pawly-border-strong);
+  border-radius: 9px;
+  background: var(--pawly-bg);
+  color: var(--pawly-bg);
+  cursor: pointer;
+}
+.pawly-post-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pawly-post-send-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.pawly-app.is-light .pawly-post-send-icon {
+  filter: none;
+}
+.pawly-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.pawly-modal textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 13px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.pawly-form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-form-label.pawly-post-pet-select {
+  font-size: 11px;
+}
+.pawly-form-label select {
+  padding: 5px 8px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 6px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+}
+.pawly-form-label.pawly-post-pet-select select {
+  border: 1px dashed var(--pawly-border-strong);
+  background: #191919;
+  font-size: 12px;
+}
+.pawly-app.is-light .pawly-form-label.pawly-post-pet-select select {
+  border-color: #c8c8c8;
+  background: #fff;
+  color: #1c1c1c;
+}
+.pawly-upload-button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 34px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-upload-button:hover {
+  background: var(--pawly-card);
+}
+.pawly-upload-button input {
+  display: none;
+}
+.pawly-media-preview {
+  position: relative;
+  max-height: 260px;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+}
+.pawly-media-preview img,
+.pawly-media-preview video {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  background: var(--pawly-card);
+}
+.pawly-media-preview > button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--pawly-card);
+  cursor: pointer;
+}
+.pawly-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+.pawly-pet-modal {
+  width: min(100%, 620px);
+  min-height: min(650px, 82dvh);
+  padding: 26px;
+}
+.pawly-add-pet-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.pawly-add-pet-modal > header {
+  height: 24px;
+  margin: 0 0 16px;
+}
+.pawly-add-pet-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.pawly-add-pet-close img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.pawly-app.is-light .pawly-add-pet-close img {
+  filter: brightness(0);
+}
+.pawly-pet-modal form {
+  flex: 1;
+  gap: 18px;
+}
+.pawly-add-pet-modal input:-webkit-autofill,
+.pawly-add-pet-modal input:-webkit-autofill:hover,
+.pawly-add-pet-modal input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--pawly-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--pawly-card) inset;
+  box-shadow: 0 0 0 1000px var(--pawly-card) inset;
+  transition: background-color 9999s ease-out;
+}
+.pawly-add-pet-modal input:autofill {
+  color: var(--pawly-text);
+  box-shadow: 0 0 0 1000px var(--pawly-card) inset;
+}
+.pawly-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.pawly-pet-modal .pawly-modal-actions {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.pawly-pet-photo-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-pet-photo-trigger {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 10px;
+  background: var(--pawly-card-deep);
+  cursor: pointer;
+}
+.pawly-pet-photo-trigger img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.pawly-app.is-light .pawly-pet-photo-trigger img {
+  filter: brightness(0);
+}
+.pawly-pet-photo-trigger input[type="file"] {
+  display: none;
+}
+.pawly-pet-photo-preview {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 12px;
+  background: var(--pawly-card-deep);
+}
+.pawly-pet-photo-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pawly-pet-photo-preview > button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 50%;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  cursor: pointer;
+}
+.pawly-toast {
+  position: fixed;
+  z-index: 20;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(92vw, 760px);
+  min-height: 70px;
+  padding: 16px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 26px;
+  background: rgba(34, 34, 34, 0.9);
+  color: #f7f7f7;
+  font-size: clamp(1.15rem, 1.8vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  animation: pawly-toast-in 180ms ease-out;
+}
+.pawly-toast svg {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  color: #dce7b8;
+}
+@keyframes pawly-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pawly-search-field {
+  display: flex;
+  height: 46px;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 0 13px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 9px;
+  background: var(--pawly-card);
+  color: var(--pawly-muted);
+}
+.pawly-search-field input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-search-field input:focus,
+.pawly-search-field input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.pawly-search-field input::placeholder {
+  color: #717171;
+}
+.pawly-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+.pawly-category-list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 8px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-category-list button:hover {
+  border-color: var(--pawly-border-strong);
+}
+.pawly-category-list button span {
+  color: var(--pawly-muted);
+}
+.pawly-subheading {
+  margin-bottom: 12px;
+}
+.pawly-discover-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+.pawly-empty-state {
+  display: flex;
+  min-height: 160px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 11px;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-feed-empty {
+  border: 0;
+}
+.pawly-empty-state > svg {
+  color: var(--pawly-accent);
+}
+.pawly-empty-state strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-empty-state > span {
+  font-size: 14.5px;
+}
+.pawly-empty-state > button:not(.pawly-primary-button) {
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  cursor: pointer;
+}
+.pawly-back-link {
+  margin: 20px 0 13px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-profile-cover {
+  display: block;
+  width: 100%;
+  height: 205px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.pawly-provider-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0 19px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-provider-profile-avatar img {
+  display: block;
+  width: 62px;
+  height: 62px;
+  border: 3px solid var(--pawly-card);
+  border-radius: 16px;
+  object-fit: cover;
+}
+.pawly-profile-provider-name {
+  min-width: 0;
+  flex: 1;
+}
+.pawly-profile-provider-name h1 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 3px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.pawly-profile-provider-name p,
+.pawly-profile-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-profile-rating {
+  margin-top: 5px;
+  color: var(--pawly-accent);
+}
+.pawly-profile-rating span {
+  color: var(--pawly-muted);
+}
+.pawly-profile-actions {
+  display: flex;
+  gap: 6px;
+}
+.pawly-verification-gate {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(32, 98, 169, 0.2);
+  border-radius: 12px;
+  background: rgba(32, 98, 169, 0.06);
+}
+.pawly-verification-gate strong {
+  color: var(--pawly-text);
+  font-size: 13px;
+}
+.pawly-verification-gate p {
+  margin: 0;
+  color: var(--pawly-secondary-text);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.pawly-verification-card {
+  margin-bottom: 20px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(32, 98, 169, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(32, 98, 169, 0.06), rgba(86, 168, 255, 0.02));
+}
+.pawly-provider-verification-card {
+  margin-top: 0;
+}
+.pawly-verification-card-head {
+  display: flex;
+  justify-content: flex-start;
+}
+.pawly-verification-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(32, 98, 169, 0.12);
+  color: var(--pawly-text);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pawly-verification-pill.is-success {
+  background: rgba(28, 173, 109, 0.12);
+  color: #1e8f5f;
+}
+.pawly-verification-card h2 {
+  margin: 12px 0 8px;
+  color: var(--pawly-text);
+  font-size: 20px;
+}
+.pawly-verification-card p {
+  margin: 0;
+  color: var(--pawly-secondary-text);
+  line-height: 1.6;
+}
+.pawly-verification-list {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--pawly-secondary-text);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.pawly-provider-verification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+.pawly-provider-verification-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--pawly-text);
+  font-size: 14px;
+}
+.pawly-provider-verification-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font: inherit;
+}
+.pawly-verification-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.pawly-profile-section {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-profile-section h2 {
+  margin: 0 0 12px;
+  font-size: 14.5px;
+  font-weight: 650;
+}
+.pawly-profile-section > p {
+  margin: 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.pawly-service-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-service-row > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pawly-service-row strong {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-service-row small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-service-row > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14.5px;
+}
+.pawly-service-row b {
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-review {
+  display: flex;
+  gap: 9px;
+}
+.pawly-review .pawly-avatar {
+  width: 30px;
+  height: 30px;
+}
+.pawly-review > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+.pawly-review > div > strong {
+  font-size: 14.5px;
+}
+.pawly-review-stars {
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  letter-spacing: 1px;
+}
+.pawly-review p {
+  width: 100%;
+  margin: -2px 0 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-pet-profile-page {
+  padding-top: 0;
+}
+.pawly-pet-hero {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  aspect-ratio: 1.65;
+  object-fit: cover;
+}
+.pawly-pet-profile-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0 15px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-pet-profile-title .pawly-page-kicker {
+  font-size: 12px;
+}
+.pawly-pet-profile-title h1 {
+  font-size: 16px;
+}
+.pawly-pet-profile-title p {
+  margin: 3px 0 0;
+  color: var(--pawly-muted);
+  font-size: 13px;
+}
+.pawly-empty-pet {
+  min-height: 300px;
+  margin-top: 22px;
+}
+.pawly-empty-pet .pawly-primary-button {
+  margin-top: 7px;
+}
+.pawly-care-history-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.pawly-care-history-heading h2 {
+  margin: 0;
+}
+.pawly-care-history-heading .pawly-secondary-button {
+  display: inline-flex;
+  min-height: 33px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 9px;
+  font-size: 14.5px;
+}
+.pawly-care-record-form {
+  display: grid;
+  gap: 11px;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: var(--pawly-card);
+}
+.pawly-care-record-form label {
+  display: grid;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-care-record-form input,
+.pawly-care-record-form textarea,
+.pawly-care-record-form select {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: var(--pawly-bg);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  resize: vertical;
+}
+.pawly-care-record-form .pawly-primary-button {
+  justify-self: end;
+}
+.pawly-inline-error {
+  margin: 8px 0;
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.pawly-care-timeline {
+  display: grid;
+  gap: 0;
+}
+.pawly-search-post {
+  margin: 10px 0;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  background: var(--pawly-card);
+}
+.pawly-search-post-author {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pawly-search-post-author > div {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+.pawly-search-post-author > div span,
+.pawly-search-post-author > small {
+  color: var(--pawly-muted);
+  font-size: 12px;
+}
+.pawly-search-post-author > small {
+  margin-left: auto;
+}
+.pawly-search-post p {
+  margin: 12px 0 6px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.pawly-care-record {
+  position: relative;
+  display: flex;
+  gap: 11px;
+  padding: 9px 0 14px;
+}
+.pawly-care-record:not(:last-child)::before {
+  position: absolute;
+  top: 43px;
+  bottom: -2px;
+  left: 16px;
+  width: 1px;
+  background: var(--pawly-border-strong);
+  content: "";
+}
+.pawly-care-record-icon {
+  z-index: 1;
+  display: grid;
+  width: 33px;
+  height: 33px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-care-record > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 1px;
+}
+.pawly-care-record strong {
+  font-size: 14.5px;
+}
+.pawly-care-record > div > span {
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-care-record small {
+  margin-top: 2px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-health-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-health-row strong {
+  max-width: 65%;
+  color: var(--pawly-text);
+  font-weight: 500;
+  text-align: right;
+}
+.pawly-health-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+.pawly-health-heading h2 {
+  margin: 0;
+}
+.pawly-health-heading .pawly-secondary-button {
+  min-height: 30px;
+  padding: 0 9px;
+  font-size: 14.5px;
+}
+.pawly-health-form {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+}
+.pawly-health-form label {
+  display: grid;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-health-form input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-health-form .pawly-primary-button {
+  justify-self: end;
+  margin-top: 2px;
+}
+.pawly-pets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 19px;
+}
+.pawly-pet-grid-card {
+  width: calc(100% - 24px);
+  justify-self: center;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 11px;
+  background: var(--pawly-card);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+.pawly-pet-grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.28);
+}
+.pawly-pet-card-cover {
+  display: block;
+  width: 100%;
+  height: clamp(105px, 18vw, 160px);
+  object-fit: cover;
+}
+.pawly-pet-card-body {
+  min-height: 88px;
+}
+.pawly-pet-card-body .pawly-provider-meta {
+  justify-content: space-between;
+}
+.pawly-pet-card-body .pawly-provider-meta > span:last-child {
+  color: var(--pawly-muted);
+}
+.pawly-placeholder-page {
+  min-height: 100%;
+}
+.pawly-owner-page {
+  padding-top: 27px;
+}
+.pawly-owner-heading {
+  margin-bottom: 25px;
+}
+.pawly-owner-heading > span,
+.pawly-owner-section-heading > div > span,
+.pawly-profile-kicker {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+.pawly-owner-heading h1,
+.pawly-profile-hero h1 {
+  margin: 3px 0;
+  font-size: 25px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+.pawly-owner-heading p,
+.pawly-profile-hero p {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-settings-group {
+  margin: 0 0 20px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+  padding: 13px 15px 4px;
+}
+.pawly-settings-group h2 {
+  margin: 0 0 8px;
+  font-size: 14.5px;
+  font-weight: 650;
+}
+.pawly-preference-row {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  gap: 11px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-preference-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--pawly-card-deep);
+  color: var(--pawly-accent);
+}
+.pawly-preference-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-preference-copy strong {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-preference-copy small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-switch {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 99px;
+  background: var(--pawly-card-deep);
+  cursor: pointer;
+}
+.pawly-switch > span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--pawly-muted);
+  transition: transform 150ms ease, background 150ms ease;
+}
+.pawly-switch.is-on {
+  border-color: var(--pawly-accent);
+  background: var(--pawly-accent);
+}
+.pawly-switch.is-on > span {
+  background: var(--pawly-bg);
+  transform: translateX(16px);
+}
+.pawly-settings-note {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-align: center;
+}
+.pawly-profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 3px 0 20px;
+}
+.pawly-profile-hero > img {
+  width: 70px;
+  height: 70px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pawly-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 25px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-profile-stats > div {
+  display: flex;
+  min-height: 65px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+.pawly-profile-stats > div + div {
+  border-left: 1px solid var(--pawly-border);
+}
+.pawly-profile-stats strong {
+  font-size: 16px;
+}
+.pawly-profile-stats span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-owner-section {
+  margin-bottom: 25px;
+}
+.pawly-owner-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.pawly-owner-section-heading h2 {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.pawly-owner-section-heading > button {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-profile-pets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.pawly-profile-pet,
+.pawly-profile-appointment {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: var(--pawly-card);
+}
+.pawly-profile-pet > img {
+  width: 45px;
+  height: 45px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.pawly-profile-pet > span,
+.pawly-profile-appointment > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-profile-pet strong,
+.pawly-profile-appointment strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-profile-pet small,
+.pawly-profile-appointment small {
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-profile-appointment {
+  margin-bottom: 7px;
+}
+.pawly-appointment-date {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--pawly-card-deep);
+  color: var(--pawly-accent);
+}
+.pawly-profile-appointment > span:last-child {
+  padding: 3px 5px;
+  border-radius: 5px;
+  background: var(--pawly-card-deep);
+  font-size: 14.5px;
+}
+.pawly-profile-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  margin-top: 4px;
+}
+.pawly-profile-post {
+  padding: 12px 0;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-profile-post p {
+  margin: 0 0 7px;
+  font-size: 14.5px;
+}
+.pawly-profile-post > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-business-page {
+  min-height: 100%;
+}
+.pawly-business-avatar-large {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  font-size: 14.5px;
+}
+.pawly-business-welcome {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-business-welcome > div {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-business-welcome > div strong {
+  font-size: 14.5px;
+}
+.pawly-business-welcome > div span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-verified-label {
+  padding: 4px 7px;
+  border: 1px solid rgba(183, 198, 141, 0.25);
+  border-radius: 6px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+}
+.pawly-business-today {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 13px 0 23px;
+  padding: 15px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-business-today > div {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-business-today > div strong {
+  font-size: 15px;
+}
+.pawly-business-today > div > span:last-child {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-business-heading {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+}
+.pawly-business-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.pawly-business-grid > button {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+  background: var(--pawly-card);
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-business-grid > button:hover {
+  border-color: var(--pawly-border-strong);
+  background: var(--pawly-card);
+}
+.pawly-business-grid > button > span:first-child {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-business-grid > button strong {
+  flex: 1;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-business-arrow {
+  color: var(--pawly-muted);
+}
+.pawly-business-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  padding: 13px 0;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-business-next:first-of-type {
+  margin-top: 20px;
+}
+.pawly-business-next > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--pawly-accent);
+}
+.pawly-business-next > div > span {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-business-next strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-business-next small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-business-next > button {
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-placeholder-card {
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+  padding: 24px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 13px;
+  background: var(--pawly-card-deep);
+  text-align: center;
+}
+.pawly-placeholder-icon {
+  display: grid;
+  width: 47px;
+  height: 47px;
+  place-items: center;
+  margin-bottom: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-placeholder-card h2 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+.pawly-placeholder-card p {
+  max-width: 300px;
+  margin: 0 0 16px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-placeholder-note {
+  margin: 15px 0;
+  color: #626262;
+  font-size: 14.5px;
+  text-align: center;
+}
+.pawly-mobile-scrim {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .pawly-app {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+  .pawly-context {
+    display: none;
+  }
+  .pawly-context.mobile-open {
+    position: fixed;
+    z-index: 12;
+    inset: 0;
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+    height: 100dvh;
+    --pawly-bg: #1c1c1c;
+    --pawly-card: #1c1c1c;
+    --pawly-card-deep: #262626;
+    --pawly-border: rgba(255, 255, 255, 0.12);
+    --pawly-border-strong: rgba(255, 255, 255, 0.22);
+    --pawly-text: #f7f7f7;
+    --pawly-secondary-text: #bcbcbc;
+    --pawly-muted: #929292;
+    background: #1c1c1c;
+    color: #f7f7f7;
+    box-shadow: none;
+    animation: pawly-sheet-in 190ms ease-out;
+  }
+  .pawly-context.mobile-open.is-auth {
+    --pawly-bg: #1e1e1e;
+    --pawly-card: #1e1e1e;
+    --pawly-card-deep: #262626;
+    background: #1e1e1e;
+  }
+  .pawly-app.is-light .pawly-context.mobile-open.is-auth {
+    --pawly-bg: #fff;
+    --pawly-card: #fff;
+    --pawly-card-deep: #f3f3f3;
+    --pawly-border: rgba(28, 28, 28, 0.14);
+    --pawly-border-strong: rgba(28, 28, 28, 0.24);
+    --pawly-text: #1c1c1c;
+    --pawly-secondary-text: #454545;
+    --pawly-muted: #6b6b6b;
+    background: #fff;
+    color: #1c1c1c;
+  }
+  .pawly-context.mobile-open .pawly-context-mobile-head {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 18px;
+    border-bottom: 0;
+    font-size: 14.5px;
+    font-weight: 650;
+  }
+  .pawly-context-quick-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+  }
+  .pawly-context-quick-nav button {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--pawly-text);
+    cursor: pointer;
+  }
+  .pawly-context-quick-nav img {
+    width: 26px;
+    height: 26px;
+    filter: invert(1);
+    object-fit: contain;
+  }
+  .pawly-context-quick-nav svg {
+    width: 25px;
+    height: 25px;
+  }
+  .pawly-app.is-light .pawly-context-quick-nav img {
+    filter: none;
+  }
+  .pawly-context.mobile-open .pawly-context-mobile-head.is-auth {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  .pawly-context.mobile-open .pawly-auth-brand {
+    display: none;
+  }
+  .pawly-context.mobile-open .pawly-auth-panel {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 12px;
+  }
+  .pawly-context.mobile-open.is-auth .pawly-auth-form .pawly-primary-button {
+    min-height: 60px;
+    border-color: #424242;
+  }
+  .pawly-mobile-scrim {
+    position: fixed;
+    z-index: 11;
+    inset: 0;
+    display: block;
+    border: 0;
+    background: var(--pawly-card);
+  }
+}
+@media (max-width: 700px) {
+  .pawly-workspace,
+  .pawly-workspace * {
+    scrollbar-width: none;
+  }
+  .pawly-workspace::-webkit-scrollbar,
+  .pawly-workspace *::-webkit-scrollbar {
+    display: none;
+  }
+  .pawly-post-header > .pawly-avatar {
+    width: 44px;
+    height: 44px;
+  }
+  .pawly-post-header > .pawly-post-author {
+    transform: translateY(2px);
+  }
+  .pawly-home-feed {
+    margin-top: -24px;
+  }
+  .pawly-post-time {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .pawly-home-feed .pawly-feed-composer {
+    margin-top: 20px;
+  }
+  .pawly-feed-tabs {
+    z-index: 7;
+    top: 51px;
+    margin-right: -16px;
+    margin-left: -16px;
+    border-bottom: 0;
+  }
+  .pawly-app {
+    display: block;
+    min-height: 0;
+    padding-bottom: 61px;
+  }
+  .pawly-rail {
+    display: none;
+  }
+  .pawly-workspace {
+    height: calc(100dvh - 61px);
+    padding-top: 0;
+  }
+  .pawly-photo-lightbox {
+    padding: 18px;
+  }
+  .pawly-photo-lightbox img {
+    max-height: 76dvh;
+    border-radius: 6px;
+  }
+  .pawly-photo-lightbox figcaption {
+    font-size: 14.5px;
+  }
+  .pawly-photo-close {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .pawly-mobile-header {
+    position: sticky;
+    z-index: 8;
+    top: 0;
+    display: flex;
+    height: 51px;
+    min-height: 51px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 13px;
+    border-bottom: 0;
+    background: var(--pawly-card);
+    backdrop-filter: blur(15px);
+  }
+  .pawly-mobile-brand {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--pawly-text);
+  }
+  .pawly-mobile-control-icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    filter: invert(1);
+    object-fit: contain;
+  }
+  .pawly-app.is-light .pawly-mobile-control-icon {
+    filter: brightness(0);
+  }
+  .pawly-mobile-logo {
+    width: 22px;
+    height: 23px;
+  }
+  .pawly-mobile-nav {
+    position: fixed;
+    z-index: 6;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    height: 61px;
+    justify-content: space-around;
+    border-top: none;
+    background: var(--pawly-card);
+    padding: 5px 4px max(5px, env(safe-area-inset-bottom));
+  }
+  .pawly-mobile-nav button {
+    display: flex;
+    min-width: 52px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #828282;
+    font-size: 14.5px;
+    cursor: pointer;
+  }
+  .pawly-mobile-nav button.is-active {
+    color: #f6f6f6;
+  }
+  .pawly-mobile-nav .pawly-nav-image-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .pawly-mobile-nav button.is-active svg {
+    color: var(--pawly-accent);
+  }
+  .pawly-page-kicker {
+    font-size: 14.5px;
+  }
+  .pawly-post-card {
+    padding-top: 15px;
+  }
+  .pawly-post-primary-actions {
+    gap: 36px;
+  }
+  .pawly-post-actions {
+    gap: 14px;
+  }
+  .pawly-provider-card {
+    flex-basis: 190px;
+  }
+  .pawly-provider-cover {
+    height: 88px;
+  }
+  .pawly-welcome-strip {
+    margin-top: 25px;
+    padding: 12px;
+  }
+  .pawly-welcome-strip strong {
+    font-size: 14.5px;
+  }
+  .pawly-welcome-strip span:not(.pawly-welcome-paw) {
+    max-width: 235px;
+    font-size: 14.5px;
+  }
+  .pawly-discover-results {
+    grid-template-columns: 1fr;
+  }
+  .pawly-discover-results .pawly-provider-card {
+    flex-basis: auto;
+  }
+  .pawly-discover-results .pawly-provider-open {
+    display: grid;
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+  .pawly-discover-results .pawly-provider-cover {
+    width: 105px;
+    height: 100%;
+    min-height: 136px;
+  }
+  .pawly-provider-profile-head {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 9px;
+  }
+  .pawly-provider-profile-avatar img {
+    width: 52px;
+    height: 52px;
+  }
+  .pawly-profile-provider-name {
+    padding-top: 2px;
+  }
+  .pawly-profile-provider-name h1 {
+    font-size: 15px;
+  }
+  .pawly-profile-provider-name p {
+    flex-wrap: wrap;
+    font-size: 14.5px;
+  }
+  .pawly-profile-actions {
+    width: 100%;
+    margin-top: 7px;
+  }
+  .pawly-profile-actions > button {
+    flex: 1;
+    min-height: 36px;
+    padding: 0 8px;
+    font-size: 14.5px;
+  }
+  .pawly-profile-cover {
+    height: 165px;
+  }
+  .pawly-toast {
+    right: 12px;
+    bottom: 73px;
+    left: 12px;
+    justify-content: center;
+  }
+  .pawly-modal-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+  .pawly-modal {
+    width: 100%;
+    max-height: 92dvh;
+    padding: 17px 16px max(18px, env(safe-area-inset-bottom));
+    border-radius: 16px 16px 0 0;
+  }
+  .pawly-modal > header h2 {
+    font-size: 16px;
+  }
+  .pawly-post-composer {
+    min-height: 168px;
+  }
+  .pawly-post-composer-input {
+    min-height: 104px;
+    padding: 14px 15px 6px;
+  }
+  .pawly-post-composer-input > textarea {
+    min-height: 72px;
+    font-size: 15.5px;
+  }
+  .pawly-post-composer-toolbar {
+    min-height: 56px;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .pawly-composer-tool,
+  .pawly-post-submit {
+    width: 42px;
+    height: 42px;
+  }
+  .pawly-composer-media-grid {
+    gap: 5px;
+    margin: 0 10px 8px;
+  }
+  .pawly-pet-profile-page {
+    padding-top: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pawly-app *,
+  .pawly-app *::before,
+  .pawly-app *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@keyframes pawly-sheet-in {
+  from {
+    opacity: 0.6;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pawly-appointment-tabs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  margin: 0 -2px;
+  scrollbar-width: none;
+}
+.pawly-appointment-tabs button {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 47px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-appointment-tabs button.is-active {
+  color: var(--pawly-text);
+}
+.pawly-appointment-tabs button > span {
+  display: grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 6px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-appointment-list {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-appointment-card {
+  margin-top: 13px;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-appointment-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-appointment-date svg {
+  color: var(--pawly-accent);
+}
+.pawly-appointment-date b {
+  margin-left: auto;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 550;
+}
+.pawly-appointment-main {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 0 12px;
+}
+.pawly-appointment-avatar {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-appointment-avatar.pawly-owner-avatar {
+  display: block;
+  object-fit: cover;
+}
+.pawly-appointment-info {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+.pawly-appointment-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+.pawly-appointment-title > strong {
+  font-size: 14.5px;
+  font-weight: 650;
+}
+.pawly-appointment-info > span,
+.pawly-appointment-info > small {
+  overflow: hidden;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-appointment-info > small {
+  color: #747474;
+}
+.pawly-appointment-price {
+  align-self: flex-start;
+  padding-top: 2px;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 21px;
+  padding: 2px 7px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 6px;
+  background: var(--pawly-card);
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-status-pending {
+  color: #d2cba0;
+}
+.pawly-status-confirmed {
+  color: var(--pawly-accent);
+}
+.pawly-status-completed {
+  color: var(--pawly-accent);
+}
+.pawly-status-cancelled,
+.pawly-status-rejected,
+.pawly-status-no_show {
+  color: #ddaeb0;
+}
+.pawly-status-in_progress {
+  color: #c3d5df;
+}
+.pawly-appointment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-appointment-actions .pawly-primary-button,
+.pawly-appointment-actions .pawly-secondary-button,
+.pawly-appointment-actions .pawly-danger-button {
+  min-height: 33px;
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+.pawly-danger-button {
+  display: inline-flex;
+  min-height: 35px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 11px;
+  border: 1px solid rgba(218, 139, 143, 0.35);
+  border-radius: 8px;
+  background: var(--pawly-card);
+  color: #e2a9ab;
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-danger-button:hover {
+  border-color: rgba(218, 139, 143, 0.65);
+}
+.pawly-appointment-message {
+  margin-left: auto;
+  padding: 7px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-appointment-message:hover {
+  color: var(--pawly-text);
+}
+.pawly-appointment-empty {
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-appointment-empty > svg {
+  color: var(--pawly-accent);
+}
+.pawly-appointment-empty > strong {
+  color: #f2f2f2;
+  font-size: 14.5px;
+}
+.pawly-appointment-empty > span {
+  max-width: 260px;
+  font-size: 14.5px;
+}
+.pawly-appointment-empty .pawly-primary-button {
+  margin-top: 6px;
+}
+.pawly-booking-modal {
+  width: min(100%, 470px);
+}
+.pawly-booking-header {
+  display: grid !important;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  margin: -4px 0 12px !important;
+}
+.pawly-booking-header h2 {
+  text-align: center;
+}
+.pawly-booking-header > button:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+.pawly-booking-header > h2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+.pawly-booking-header > button:last-child {
+  grid-column: 3;
+  grid-row: 1;
+}
+.pawly-booking-progress {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.pawly-booking-progress span {
+  height: 3px;
+  flex: 1;
+  border-radius: 4px;
+  background: var(--pawly-card);
+  border: 1px solid var(--pawly-border-strong);
+}
+.pawly-booking-progress span.is-complete {
+  border-color: var(--pawly-accent);
+}
+.pawly-booking-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pawly-booking-step h3 {
+  margin: 0 0 2px;
+  font-size: 14.5px;
+  font-weight: 650;
+}
+.pawly-booking-step > label,
+.pawly-reschedule-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-booking-step select,
+.pawly-booking-step input,
+.pawly-reschedule-form input,
+.pawly-reschedule-form select {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  color-scheme: dark;
+}
+.pawly-booking-step textarea {
+  min-height: 59px;
+  resize: vertical;
+}
+.pawly-booking-service-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -4px;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--pawly-border);
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-booking-service-summary strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+.pawly-time-grid button {
+  min-height: 36px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-time-grid button.is-selected {
+  border-color: var(--pawly-accent);
+  color: var(--pawly-text);
+}
+.pawly-booking-summary {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-booking-summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pawly-border);
+  font-size: 14.5px;
+}
+.pawly-booking-summary span {
+  color: var(--pawly-muted);
+}
+.pawly-booking-summary strong {
+  max-width: 68%;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 550;
+  text-align: right;
+}
+.pawly-booking-summary .pawly-booking-total strong {
+  font-size: 14.5px;
+}
+.pawly-booking-note {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-booking-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-booking-footer .pawly-primary-button {
+  min-width: 148px;
+}
+.pawly-booking-footer .pawly-primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.pawly-detail-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -2px 0 10px;
+}
+.pawly-detail-status > span {
+  color: #777;
+  font-size: 14.5px;
+  letter-spacing: 0.08em;
+}
+.pawly-detail-modal > h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+}
+.pawly-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 9px;
+}
+.pawly-detail-grid > div {
+  display: flex;
+  min-width: 0;
+  gap: 8px;
+  align-items: flex-start;
+}
+.pawly-detail-grid > div > svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--pawly-accent);
+}
+.pawly-detail-grid > div > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+.pawly-detail-grid small,
+.pawly-detail-notes > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-detail-grid strong {
+  overflow-wrap: anywhere;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 550;
+}
+.pawly-detail-notes {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-detail-notes p {
+  margin: 3px 0 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-detail-modal .pawly-modal-actions {
+  flex-wrap: wrap;
+  margin-top: 17px;
+  padding-top: 13px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-detail-modal .pawly-modal-actions > button {
+  min-height: 34px;
+  padding: 0 9px;
+  font-size: 14.5px;
+}
+.pawly-reschedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pawly-confirm-modal {
+  width: min(100%, 390px);
+  text-align: center;
+}
+.pawly-confirm-modal h2 {
+  margin: 9px 0 5px;
+  font-size: 16px;
+}
+.pawly-confirm-modal p {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-confirm-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin: 0 auto;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 12px;
+  color: #d5b3b4;
+}
+.pawly-confirm-modal .pawly-modal-actions {
+  justify-content: center;
+  margin-top: 16px;
+}
+.pawly-confirm-modal .pawly-modal-actions > button {
+  font-size: 14.5px;
+}
+@media (max-width: 700px) {
+  .pawly-appointment-card {
+    padding: 12px;
+  }
+  .pawly-appointment-main {
+    align-items: flex-start;
+  }
+  .pawly-appointment-price {
+    font-size: 14.5px;
+  }
+  .pawly-appointment-actions {
+    gap: 6px;
+  }
+  .pawly-appointment-actions .pawly-appointment-message {
+    margin-left: 0;
+  }
+  .pawly-booking-header {
+    margin-bottom: 10px !important;
+  }
+  .pawly-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .pawly-confirm-modal .pawly-modal-actions {
+    flex-direction: column-reverse;
+  }
+}
+
+.pawly-messages-page {
+  width: min(100%, 1050px);
+}
+.pawly-message-layout {
+  display: grid;
+  height: min(680px, calc(100dvh - 160px));
+  min-height: 420px;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.4fr);
+  overflow: hidden;
+  border: 1px solid var(--pawly-border);
+  border-radius: 13px;
+}
+.pawly-conversation-list {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border-right: 1px solid var(--pawly-border);
+}
+.pawly-conversation-search {
+  display: flex;
+  height: 54px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+  padding: 0 15px;
+  border-bottom: 1px solid var(--pawly-border);
+  color: var(--pawly-muted);
+}
+.pawly-conversation-search input,
+.pawly-chat-composer input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-conversation-search input:focus-visible,
+.pawly-chat-composer input:focus-visible {
+  outline: 0;
+}
+.pawly-conversation-search input::placeholder,
+.pawly-chat-composer input::placeholder {
+  color: var(--pawly-muted);
+}
+.pawly-conversation-items {
+  overflow-y: auto;
+}
+.pawly-conversation-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 12px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-conversation-row:hover,
+.pawly-conversation-row.is-selected {
+  background: rgba(255, 255, 255, 0.055);
+}
+.pawly-conversation-row > img,
+.pawly-chat-header > img {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pawly-conversation-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+.pawly-conversation-heading {
+  display: flex;
+  min-width: 0;
+  justify-content: space-between;
+  gap: 6px;
+}
+.pawly-conversation-heading strong,
+.pawly-conversation-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-conversation-heading strong {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-conversation-heading small {
+  flex: 0 0 auto;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-conversation-preview {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-conversation-unread {
+  display: grid;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pawly-accent);
+  color: #000;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+.pawly-conversation-empty {
+  padding: 12px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-chat-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+.pawly-chat-header {
+  display: flex;
+  min-height: 63px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-chat-header > span {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-chat-header strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-chat-header small {
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-chat-back {
+  display: none;
+}
+.pawly-chat-messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 18px;
+}
+.pawly-chat-day {
+  align-self: center;
+  margin: 2px 0 8px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-chat-message {
+  display: flex;
+  max-width: min(86%, 390px);
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 4px;
+}
+.pawly-chat-message p {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px 12px 12px 3px;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-chat-message time {
+  padding: 0 3px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-chat-message.is-own {
+  align-self: flex-end;
+}
+.pawly-chat-message.is-own p {
+  border-color: rgba(220, 231, 184, 0.28);
+  border-radius: 12px 12px 3px 12px;
+  color: var(--pawly-accent);
+}
+.pawly-chat-message.is-own time {
+  align-self: flex-end;
+}
+.pawly-chat-composer {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 10px;
+  margin: 0 13px 13px;
+  padding: 7px 8px 7px 13px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 10px;
+}
+.pawly-chat-composer button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: var(--pawly-accent);
+  color: #000;
+  cursor: pointer;
+}
+.pawly-chat-composer button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.pawly-notifications-page {
+  width: min(100%, 820px);
+}
+.pawly-notification-toolbar {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-notification-summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 650;
+}
+.pawly-notification-summary small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  font-weight: 450;
+}
+.pawly-notification-toolbar > button {
+  font-size: 14.5px;
+}
+.pawly-notification-toolbar > button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.pawly-notification-filters {
+  display: flex;
+  gap: 17px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-notification-filters button {
+  position: relative;
+  display: flex;
+  min-height: 43px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-notification-filters button.is-active {
+  color: var(--pawly-text);
+}
+.pawly-notification-filters button.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--pawly-accent);
+  content: "";
+}
+.pawly-notification-filters button span {
+  display: grid;
+  min-width: 17px;
+  height: 17px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--pawly-accent);
+  color: #000;
+  font-size: 14.5px;
+}
+.pawly-notification-list {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-notification-row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--pawly-border);
+  border-left: 2px solid transparent;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-notification-row.is-unread {
+  border-left-color: var(--pawly-accent);
+}
+.pawly-notification-row:hover {
+  border-bottom-color: var(--pawly-border-strong);
+}
+.pawly-notification-avatar {
+  position: relative;
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 50%;
+  color: var(--pawly-accent);
+}
+.pawly-notification-avatar > img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+.pawly-notification-type {
+  position: absolute;
+  right: -3px;
+  bottom: -2px;
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 2px solid var(--pawly-card);
+  border-radius: 50%;
+  background: var(--pawly-card);
+  color: var(--pawly-accent);
+}
+.pawly-notification-type.is-community {
+  color: #e9a8aa;
+}
+.pawly-notification-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.pawly-notification-copy > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pawly-notification-copy strong {
+  font-weight: 650;
+}
+.pawly-notification-copy small {
+  overflow: hidden;
+  color: var(--pawly-secondary-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-notification-copy time {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-notification-unread {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--pawly-accent);
+}
+.pawly-notification-empty {
+  display: flex;
+  min-height: 280px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-notification-empty > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  margin-bottom: 12px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  color: var(--pawly-accent);
+}
+.pawly-notification-empty strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-notification-empty p,
+.pawly-notification-note {
+  margin: 5px 0 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-notification-note {
+  margin-top: 18px;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .pawly-message-layout {
+    position: relative;
+    height: calc(100dvh - 166px);
+    min-height: 380px;
+    grid-template-columns: 1fr;
+  }
+  .pawly-chat-panel {
+    display: none;
+  }
+  .pawly-message-layout.thread-open .pawly-conversation-list {
+    display: none;
+  }
+  .pawly-message-layout.thread-open .pawly-chat-panel {
+    display: flex;
+  }
+  .pawly-chat-back {
+    display: grid;
+  }
+}
+.pawly-provider-favorite {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(25, 25, 25, 0.82);
+  color: var(--pawly-text);
+  cursor: pointer;
+}
+.pawly-provider-favorite.is-favorite {
+  color: #e9a8aa;
+}
+.pawly-favorites-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 0 14px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-favorites-toolbar h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+.pawly-favorites-toolbar > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  padding-top: 16px;
+}
+.pawly-favorite-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-favorite-open {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-favorite-open > img {
+  display: block;
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.pawly-favorite-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 11px 12px 12px;
+}
+.pawly-favorite-info > strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-favorite-info > small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-favorite-meta {
+  display: flex;
+  gap: 11px;
+  margin-top: 3px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-favorite-meta > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pawly-favorite-meta svg:first-child {
+  color: var(--pawly-accent);
+}
+.pawly-favorite-price {
+  margin-top: 3px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-favorite-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(25, 25, 25, 0.82);
+  color: var(--pawly-text);
+  cursor: pointer;
+}
+.pawly-favorite-heart {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: grid;
+  place-items: center;
+  color: #e9a8aa;
+}
+.pawly-favorites-empty {
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.pawly-favorites-empty > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  margin-bottom: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 15px;
+  color: #e9a8aa;
+}
+.pawly-favorites-empty strong {
+  font-size: 14.5px;
+}
+.pawly-favorites-empty p {
+  max-width: 310px;
+  margin: 5px 0 14px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+@media (max-width: 700px) {
+  .pawly-favorites-grid {
+    grid-template-columns: 1fr;
+  }
+  .pawly-favorite-open {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .pawly-favorite-open > img {
+    height: 100%;
+    min-height: 145px;
+  }
+  .pawly-favorite-heart {
+    display: none;
+  }
+}
+.pawly-services-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0 14px;
+}
+.pawly-services-toolbar h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+.pawly-services-toolbar > div > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-services-toolbar .pawly-primary-button,
+.pawly-service-empty .pawly-primary-button {
+  min-height: 35px;
+  font-size: 14.5px;
+}
+.pawly-service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 15px;
+}
+.pawly-service-card {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-service-icon {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  color: var(--pawly-accent);
+}
+.pawly-service-copy {
+  min-width: 0;
+}
+.pawly-service-name-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pawly-service-name-line > strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-service-status {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-service-status.is-active {
+  border-color: rgba(220, 231, 184, 0.3);
+  color: var(--pawly-accent);
+}
+.pawly-service-copy > span:nth-child(2) {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-service-copy p {
+  margin: 6px 0 9px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-service-facts {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 14.5px;
+}
+.pawly-service-facts > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pawly-muted);
+}
+.pawly-service-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2px;
+}
+.pawly-service-controls .pawly-secondary-button {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+.pawly-service-toggle {
+  position: relative;
+  width: 34px;
+  height: 19px;
+  padding: 2px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 12px;
+  background: var(--pawly-card);
+  cursor: pointer;
+}
+.pawly-service-toggle > span {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #777;
+  transition:
+    transform 150ms ease,
+    background 150ms ease;
+}
+.pawly-service-toggle.is-active > span {
+  background: var(--pawly-accent);
+  transform: translateX(14px);
+}
+.pawly-service-empty {
+  display: flex;
+  min-height: 290px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.pawly-service-empty > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  margin-bottom: 13px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  color: var(--pawly-accent);
+}
+.pawly-service-empty > strong {
+  font-size: 14.5px;
+}
+.pawly-service-empty > p {
+  max-width: 320px;
+  margin: 5px 0 14px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-service-modal label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-service-modal input,
+.pawly-service-modal select {
+  width: 100%;
+  min-width: 0;
+  height: 39px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-service-modal .pawly-form-grid {
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 700px) {
+  .pawly-service-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 9px;
+    padding: 11px;
+  }
+  .pawly-service-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .pawly-service-controls {
+    grid-column: 2;
+    justify-content: flex-end;
+  }
+  .pawly-service-modal .pawly-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.pawly-calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0 14px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-calendar-toolbar h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+.pawly-calendar-toolbar > div > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-calendar-toolbar .pawly-secondary-button {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+.pawly-calendar-panel {
+  margin-top: 15px;
+  padding: 14px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 12px;
+  background: var(--pawly-card);
+}
+.pawly-calendar-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.pawly-calendar-month > strong {
+  font-size: 14.5px;
+}
+.pawly-calendar-month > div {
+  display: flex;
+  gap: 3px;
+}
+.pawly-calendar-month .pawly-icon-button {
+  width: 30px;
+  height: 30px;
+}
+.pawly-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+.pawly-calendar-days > button {
+  display: flex;
+  min-width: 0;
+  min-height: 67px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--pawly-card);
+  color: var(--pawly-muted);
+  cursor: pointer;
+}
+.pawly-calendar-days > button > span {
+  font-size: 14.5px;
+}
+.pawly-calendar-days > button > strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-calendar-days > button.is-selected {
+  border-color: var(--pawly-border-strong);
+  color: var(--pawly-accent);
+}
+.pawly-calendar-days > button.is-selected > strong {
+  color: var(--pawly-accent);
+}
+.pawly-calendar-days > button > i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pawly-accent);
+}
+.pawly-calendar-agenda-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 22px 0 10px;
+}
+.pawly-calendar-agenda-heading h2 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 650;
+}
+.pawly-calendar-agenda-heading > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-calendar-agenda {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-calendar-appointment {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-calendar-appointment > time {
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-calendar-appointment-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+.pawly-calendar-appointment-copy > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.pawly-calendar-appointment-copy > div > strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-calendar-appointment-copy > span {
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-calendar-appointment-copy > small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-calendar-appointment > b {
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-calendar-empty {
+  display: flex;
+  min-height: 170px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-calendar-empty > svg {
+  color: var(--pawly-accent);
+}
+.pawly-calendar-empty > strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-calendar-empty > span {
+  font-size: 14.5px;
+}
+@media (max-width: 700px) {
+  .pawly-calendar-panel {
+    padding: 10px 7px;
+  }
+  .pawly-calendar-days {
+    gap: 1px;
+  }
+  .pawly-calendar-days > button {
+    min-height: 59px;
+  }
+  .pawly-calendar-appointment {
+    grid-template-columns: 1fr auto;
+    gap: 7px;
+    padding: 12px 4px;
+  }
+  .pawly-calendar-appointment > time {
+    grid-column: 1;
+  }
+  .pawly-calendar-appointment-copy {
+    grid-column: 1;
+  }
+  .pawly-calendar-appointment > b {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+.pawly-customer-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 15px 0 10px;
+  padding: 0 11px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+  color: var(--pawly-muted);
+}
+.pawly-customer-search input {
+  width: 100%;
+  height: 39px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-customer-search input::placeholder {
+  color: var(--pawly-subtle);
+}
+.pawly-customer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 4px;
+}
+.pawly-customer-card {
+  display: grid;
+  grid-template-columns: 39px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-customer-card > img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pawly-customer-details {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+.pawly-customer-heading,
+.pawly-customer-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+}
+.pawly-customer-heading > strong {
+  font-size: 14.5px;
+}
+.pawly-customer-heading > span,
+.pawly-customer-pets,
+.pawly-customer-stats > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-customer-stats > strong {
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-customer-history {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  border-top: 1px solid var(--pawly-border);
+}
+.pawly-customer-history > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 7px;
+}
+.pawly-customer-history > div > span {
+  overflow: hidden;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-customer-history small {
+  flex: 0 0 auto;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-customer-message {
+  display: flex;
+  min-height: 31px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 9px;
+  font-size: 14.5px;
+}
+.pawly-customer-empty {
+  min-height: 220px;
+  border: 1px dashed var(--pawly-border);
+  border-radius: 11px;
+}
+@media (max-width: 700px) {
+  .pawly-customer-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 9px;
+    padding: 11px;
+  }
+  .pawly-customer-card > img {
+    width: 34px;
+    height: 34px;
+  }
+  .pawly-customer-message {
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+.pawly-review-overview {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-review-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid var(--pawly-border);
+}
+.pawly-review-score > strong {
+  font-size: 29px;
+  line-height: 1.1;
+}
+.pawly-review-score > span,
+.pawly-review-rating {
+  color: var(--pawly-accent);
+  letter-spacing: 0.08em;
+}
+.pawly-review-score > small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-review-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pawly-review-breakdown > div {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 7px;
+  color: #c6c6c6;
+  font-size: 14.5px;
+}
+.pawly-review-breakdown i {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #333;
+}
+.pawly-review-breakdown i > b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pawly-accent);
+}
+.pawly-review-breakdown small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-align: right;
+}
+.pawly-review-filters {
+  display: flex;
+  gap: 7px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-review-filters > button {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 16px;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-review-filters > button.is-selected {
+  border-color: rgba(220, 231, 184, 0.35);
+  background: rgba(220, 231, 184, 0.08);
+  color: var(--pawly-accent);
+}
+.pawly-review-filters > button > span {
+  margin-left: 4px;
+  color: inherit;
+}
+.pawly-provider-review-list {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-provider-review {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: start;
+  gap: 11px;
+  padding: 15px 3px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-provider-review > img {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pawly-provider-review-body {
+  min-width: 0;
+}
+.pawly-provider-review-top,
+.pawly-provider-review-top > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.pawly-provider-review-top > div > strong {
+  font-size: 14.5px;
+}
+.pawly-provider-review-top > div > span,
+.pawly-provider-review-service {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-provider-review-rating {
+  flex: 0 0 auto;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-provider-review-body > p,
+.pawly-provider-review-reply > p {
+  margin: 7px 0 10px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.pawly-provider-review-reply {
+  margin-top: 10px;
+  padding: 10px 11px;
+  border-left: 2px solid var(--pawly-accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--pawly-card-deep);
+}
+.pawly-provider-review-reply > strong {
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+}
+.pawly-provider-review-reply > p {
+  margin: 4px 0 6px;
+  color: #c4c4c4;
+  font-size: 14.5px;
+}
+.pawly-provider-review-reply > button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-provider-review-reply-form {
+  display: flex;
+  gap: 7px;
+}
+.pawly-provider-review-reply-form > input {
+  min-width: 0;
+  flex: 1;
+  height: 34px;
+  padding: 0 9px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 7px;
+  background: var(--pawly-card);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-provider-review-reply-form .pawly-primary-button {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 14.5px;
+}
+.pawly-review-empty {
+  margin-top: 12px;
+}
+@media (max-width: 700px) {
+  .pawly-review-overview {
+    grid-template-columns: 85px minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px 8px;
+  }
+  .pawly-provider-review-top {
+    align-items: flex-start;
+  }
+  .pawly-provider-review-top > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+.pawly-analytics-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin: 15px 0;
+}
+.pawly-analytics-metrics > article,
+.pawly-analytics-panel {
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: var(--pawly-card);
+}
+.pawly-analytics-metrics > article {
+  display: flex;
+  min-height: 102px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 12px 14px;
+}
+.pawly-analytics-metrics > article > span,
+.pawly-analytics-metrics > article > small {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-analytics-metrics > article > strong {
+  font-size: 19px;
+  font-weight: 650;
+}
+.pawly-analytics-metrics > article:first-child > strong {
+  color: var(--pawly-accent);
+}
+.pawly-analytics-panel {
+  min-width: 0;
+  padding: 14px;
+}
+.pawly-analytics-panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.pawly-analytics-panel-heading > h2 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-analytics-panel-heading > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-revenue-chart {
+  display: flex;
+  min-height: 160px;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 8px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-revenue-column {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.pawly-revenue-column > strong {
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-revenue-column > div {
+  display: flex;
+  width: min(34px, 70%);
+  height: 105px;
+  align-items: flex-end;
+  border-radius: 6px 6px 0 0;
+  background: var(--pawly-card-deep);
+}
+.pawly-revenue-column > div > i {
+  display: block;
+  width: 100%;
+  min-height: 4px;
+  border-radius: 6px 6px 0 0;
+  background: var(--pawly-accent);
+}
+.pawly-revenue-column > span {
+  padding-bottom: 7px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+.pawly-analytics-lower-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 9px;
+}
+.pawly-status-breakdown,
+.pawly-service-performance {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.pawly-analytics-row,
+.pawly-analytics-row > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+.pawly-analytics-row > span {
+  justify-content: flex-start;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-analytics-row > span > i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pawly-muted);
+}
+.pawly-analytics-row > span > i.is-completed {
+  background: var(--pawly-accent);
+}
+.pawly-analytics-row > span > i.is-confirmed {
+  background: #9cbbdf;
+}
+.pawly-analytics-row > span > i.is-pending {
+  background: #e5bd75;
+}
+.pawly-analytics-row > span > i.is-cancelled {
+  background: #d17d7d;
+}
+.pawly-analytics-row > strong {
+  font-size: 14.5px;
+}
+.pawly-service-performance > div > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-service-performance > div > span > strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-service-performance > div > i {
+  display: block;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #333;
+}
+.pawly-service-performance > div > i > b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pawly-accent);
+}
+.pawly-analytics-empty {
+  display: grid;
+  min-height: 105px;
+  place-items: center;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .pawly-analytics-metrics > article {
+    min-height: 88px;
+    padding: 10px;
+  }
+  .pawly-analytics-metrics > article > strong {
+    font-size: 16px;
+  }
+  .pawly-analytics-lower-grid {
+    grid-template-columns: 1fr;
+  }
+  .pawly-analytics-panel {
+    padding: 12px 10px;
+  }
+}
+.pawly-admin-page {
+  min-height: 100%;
+}
+.pawly-admin-login {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #000;
+  color: #f7f7f7;
+  font-family: "Circular Std", "Circular", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.pawly-admin-login-inner {
+  display: grid;
+  width: min(100%, 72rem);
+  height: 100%;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+}
+.pawly-admin-login-image {
+  position: relative;
+  display: grid;
+  width: min(100%, 420px);
+  height: min(68dvh, 520px);
+  justify-self: center;
+  place-items: center;
+  min-width: 0;
+  overflow: hidden;
+  background: #000;
+}
+.pawly-admin-login-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.pawly-admin-login-content > .pawly-page-kicker {
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.pawly-admin-login-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 22px clamp(14px, 2vw, 34px);
+  background: #000;
+}
+.pawly-admin-login-content {
+  width: 100%;
+  margin: auto 0;
+}
+.pawly-admin-login-content h1 {
+  margin: 14px 0 16px;
+  font-size: clamp(50px, 6vw, 84px);
+  font-weight: 750;
+  line-height: 0.95;
+}
+.pawly-admin-login-content > p {
+  margin: 0 0 30px;
+  color: #aaa;
+  font-size: 16px;
+}
+.pawly-admin-login-content .pawly-auth-form {
+  gap: 18px;
+}
+.pawly-admin-login-content .pawly-auth-form label {
+  color: #d0d0d0;
+}
+.pawly-admin-login-content .pawly-auth-form input,
+.pawly-admin-login-content .pawly-auth-form select {
+  height: 52px;
+  border-color: #fff;
+  background: #000;
+  color: #f7f7f7;
+  font-size: 16px;
+}
+.pawly-admin-login-content .pawly-auth-form input::placeholder {
+  color: #777;
+}
+.pawly-admin-login-content .pawly-primary-button {
+  min-height: 54px;
+  margin-top: 4px;
+  border-color: #f7f8fa;
+  background: #f7f8fa;
+  color: #101010 !important;
+  font-size: 16px;
+}
+.pawly-admin-login-content .pawly-primary-button:hover {
+  background: #e5e7eb;
+}
+.pawly-admin-demo-note {
+  margin-top: 18px !important;
+  font-size: 14.5px !important;
+}
+.pawly-admin-dashboard {
+  --pawly-bg: #f8f9fa;
+  --pawly-card: #f8f9fa;
+  --pawly-card-deep: #eef0f2;
+  --pawly-border: #cbd5e1;
+  --pawly-border-strong: #94a3b8;
+  --pawly-text: #111827;
+  --pawly-secondary-text: #374151;
+  --pawly-muted: #6b7280;
+  --pawly-subtle: #6b7280;
+  --pawly-accent: #047857;
+  display: block;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: #f8f9fa;
+  color: #111827;
+}
+.pawly-admin-dashboard,
+.pawly-admin-dashboard * {
+  scrollbar-width: none;
+}
+.pawly-admin-dashboard::-webkit-scrollbar,
+.pawly-admin-dashboard *::-webkit-scrollbar {
+  display: none;
+}
+.pawly-admin-dashboard-header {
+  display: flex;
+  height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.pawly-admin-dashboard-header a {
+  color: inherit;
+  font-size: 14.5px;
+  text-decoration: none;
+}
+.pawly-admin-dashboard .pawly-workspace {
+  height: calc(100% - 58px);
+}
+.pawly-admin-dashboard .pawly-mobile-header,
+.pawly-admin-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0 16px;
+}
+.pawly-admin-heading h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.pawly-admin-heading p {
+  margin: 4px 0 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-secure {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 15px;
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+}
+.pawly-admin-stats {
+  display: grid;
+  margin-bottom: 18px;
+}
+.pawly-admin-stats > article {
+  display: flex;
+  min-width: 0;
+  min-height: 89px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  background: var(--pawly-card);
+}
+.pawly-admin-stats > article > span,
+.pawly-admin-stats > article > small {
+  overflow: hidden;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-admin-stats > article > strong {
+  font-size: 19px;
+  font-weight: 650;
+}
+.pawly-admin-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-admin-tabs > button {
+  display: flex;
+  min-height: 39px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-admin-tabs > button.is-selected {
+  border-bottom-color: var(--pawly-accent);
+  color: var(--pawly-text);
+}
+.pawly-admin-tabs > button > span {
+  display: grid;
+  min-width: 17px;
+  height: 17px;
+  place-items: center;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--pawly-card-deep);
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-admin-queue {
+  display: flex;
+  flex-direction: column;
+}
+.pawly-admin-card {
+  padding: 15px 2px;
+  border-bottom: 1px solid var(--pawly-border);
+}
+.pawly-admin-card-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pawly-admin-card-head > img,
+.pawly-admin-business-mark {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pawly-admin-card-head > div {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.pawly-admin-card-head > div > strong {
+  overflow: hidden;
+  font-size: 14.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pawly-admin-card-head > div > span {
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-reason,
+.pawly-admin-request-status {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 7px;
+  border: 1px solid rgba(229, 189, 117, 0.24);
+  border-radius: 12px;
+  color: #e5bd75;
+  font-size: 14.5px;
+}
+.pawly-admin-card > p {
+  margin: 10px 0 12px 45px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.pawly-admin-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+}
+.pawly-admin-card-actions > button {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+.pawly-danger-button {
+  border: 1px solid rgba(209, 125, 125, 0.36);
+  border-radius: 7px;
+  background: rgba(209, 125, 125, 0.08);
+  color: #e39a9a;
+  cursor: pointer;
+}
+.pawly-danger-button:hover {
+  background: rgba(209, 125, 125, 0.15);
+}
+.pawly-admin-business-mark {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 10px;
+  color: var(--pawly-accent);
+}
+.pawly-admin-request-status {
+  border-color: var(--pawly-border);
+  color: var(--pawly-muted);
+}
+.pawly-admin-request-status.needs-info {
+  border-color: rgba(229, 189, 117, 0.24);
+  color: #e5bd75;
+}
+.pawly-admin-card-actions > button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.pawly-admin-empty {
+  display: flex;
+  min-height: 210px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--pawly-muted);
+  text-align: center;
+}
+.pawly-admin-empty > svg {
+  color: var(--pawly-accent);
+}
+.pawly-admin-empty > strong {
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-admin-empty > span {
+  font-size: 14.5px;
+}
+.pawly-admin-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  color: var(--pawly-text);
+}
+.pawly-admin-sidebar {
+  display: flex;
+  width: 244px;
+  flex: 0 0 244px;
+  flex-direction: column;
+  padding: 22px 14px 16px;
+  border-right: 1px solid var(--pawly-border);
+  background: #fff;
+}
+.pawly-admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px 24px;
+  color: #1c1c1c;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.pawly-admin-brand span {
+  padding: 3px 6px;
+  border: 1px solid rgba(82, 106, 44, 0.2);
+  border-radius: 5px;
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  letter-spacing: 0.08em;
+}
+.pawly-admin-sidebar-label {
+  padding: 12px 10px 7px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.pawly-admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pawly-admin-sidebar nav button {
+  display: flex;
+  min-height: 43px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-admin-sidebar nav button:hover,
+.pawly-admin-sidebar nav button.is-selected {
+  border-color: var(--pawly-border);
+  background: #f1f3f5;
+  color: var(--pawly-text);
+}
+.pawly-admin-nav-index {
+  width: 22px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-nav-count {
+  display: grid;
+  min-width: 22px;
+  height: 22px;
+  place-items: center;
+  margin-left: auto;
+  padding: 0 5px;
+  border-radius: 12px;
+  background: #f1f3f5;
+  color: #775d12;
+  font-size: 14.5px;
+}
+.pawly-admin-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 15px 8px 0;
+  border-top: 1px solid var(--pawly-border);
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+}
+.pawly-admin-role-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--pawly-accent);
+}
+.pawly-admin-sidebar-footer button {
+  margin-left: auto;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-admin-main {
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+.pawly-admin-topbar {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 30px;
+  border-bottom: 1px solid var(--pawly-border);
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-topbar b {
+  padding: 0 7px;
+  color: var(--pawly-subtle);
+}
+.pawly-admin-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pawly-admin-top-role {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--pawly-accent);
+  white-space: nowrap;
+}
+.pawly-admin-top-actions > button {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.pawly-admin-content {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: 28px 30px 48px;
+}
+.pawly-admin-content .pawly-admin-heading {
+  padding: 0 0 22px;
+}
+.pawly-admin-content .pawly-admin-heading h1 {
+  font-size: 25px;
+}
+.pawly-admin-stats > .pawly-admin-stat-card {
+  min-height: 112px;
+  align-items: flex-start;
+  border: 1px solid var(--pawly-border);
+  color: var(--pawly-text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.pawly-admin-stats > .pawly-admin-stat-card:hover {
+  border-color: var(--pawly-border-strong);
+  background: #f6f7f8;
+}
+.pawly-admin-stats > .pawly-admin-stat-card > strong {
+  font-size: 23px;
+}
+.pawly-admin-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.pawly-admin-feature-card,
+.pawly-admin-user-card,
+.pawly-admin-create-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+  padding: 17px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.12);
+}
+.pawly-admin-feature-head {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+}
+.pawly-admin-card-icon,
+.pawly-admin-user-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--pawly-border);
+  border-radius: 9px;
+  background: #f1f3f5;
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+.pawly-admin-user-avatar {
+  border-radius: 50%;
+}
+.pawly-admin-feature-card h2,
+.pawly-admin-user-card h2,
+.pawly-admin-create-card h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+.pawly-admin-feature-card > p,
+.pawly-admin-user-card > p {
+  min-height: 42px;
+  margin: 0;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  overflow-wrap: anywhere;
+}
+.pawly-admin-feature-card > .pawly-secondary-button,
+.pawly-admin-feature-card > .pawly-primary-button {
+  align-self: flex-start;
+}
+.pawly-admin-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: auto;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-status {
+  padding: 4px 8px;
+  border: 1px solid var(--pawly-border);
+  border-radius: 14px;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+  text-transform: capitalize;
+}
+.pawly-admin-status.active {
+  border-color: rgba(170, 205, 135, 0.25);
+  color: #3d5f25;
+}
+.pawly-admin-status.pending {
+  border-color: rgba(229, 189, 117, 0.25);
+  color: #775d12;
+}
+.pawly-admin-status.suspended,
+.pawly-admin-status.paused {
+  color: #8b3e43;
+}
+.pawly-admin-section-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.pawly-admin-section-toolbar > p,
+.pawly-admin-count-label {
+  margin: 0;
+  color: var(--pawly-muted);
+  font-size: 14.5px;
+}
+.pawly-admin-create-card {
+  max-width: 620px;
+  margin-bottom: 16px;
+}
+.pawly-admin-create-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--pawly-secondary-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.pawly-admin-create-card input,
+.pawly-admin-create-card select {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+}
+.pawly-admin-card-actions {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: auto;
+}
+.pawly-admin-card-actions > button {
+  min-height: 36px;
+}
+.pawly-admin-user-card .pawly-danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px;
+  font-size: 14.5px;
+}
+.pawly-admin-notice {
+  margin: -4px 0 16px;
+  color: var(--pawly-accent);
+  font-size: 14.5px;
+}
+.pawly-global-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.pawly-country-picker {
+  position: relative;
+}
+.pawly-country-trigger,
+.pawly-theme-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pawly-text);
+  box-shadow: none;
+  cursor: pointer;
+}
+.pawly-country-trigger {
+  width: 54px;
+  height: 43px;
+}
+.pawly-country-trigger .pawly-flag-art {
+  width: 44px;
+  height: 29px;
+  border-radius: 0px;
+}
+.pawly-theme-toggle {
+  width: 50px;
+  height: 50px;
+}
+.pawly-theme-toggle-icon {
+  width: 34px;
+  height: 34px;
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+.pawly-app.is-light .pawly-theme-toggle-icon {
+  filter: none;
+}
+.pawly-country-menu {
+  position: absolute;
+  z-index: 11;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 236px;
+  max-height: min(400px, calc(100dvh - 82px));
+  overflow-y: auto;
+  padding: 7px;
+  border: 1px solid var(--pawly-border-strong);
+  border-radius: 10px;
+  background: var(--pawly-card);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
+}
+.pawly-country-menu > button {
+  display: flex;
+  width: 100%;
+  min-height: 51px;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--pawly-text);
+  font-size: 14.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.pawly-country-menu > button:hover {
+  background: var(--pawly-card-deep);
+}
+.pawly-country-option-flag {
+  display: grid;
+  width: 46px;
+  height: 31px;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+}
+.pawly-flag-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.pawly-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pawly-notification-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  filter: invert(1);
+  object-fit: contain;
+}
+.pawly-app.is-light .pawly-notification-icon {
+  filter: none;
+}
+.pawly-global-controls.is-mobile {
+  gap: 3px;
+}
+.pawly-global-controls.is-mobile .pawly-country-trigger {
+  width: 42px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.pawly-global-controls.is-mobile .pawly-country-trigger .pawly-flag-art {
+  width: 36px;
+  height: 24px;
+  border-radius: 5px;
+}
+.pawly-global-controls.is-mobile .pawly-theme-toggle {
+  width: 42px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.pawly-global-controls.is-mobile .pawly-theme-toggle-icon {
+  width: 31px;
+  height: 31px;
+}
+.pawly-app.is-light .pawly-primary-button {
+  border-color: #1c1c1c;
+  background: #1c1c1c;
+  color: #f8f9fa !important;
+}
+.pawly-app.is-light .pawly-primary-button:hover {
+  background: #343a40;
+}
+.pawly-app.is-light .pawly-status-pending {
+  color: #775d12;
+}
+.pawly-app.is-light .pawly-status-confirmed,
+.pawly-app.is-light .pawly-status-completed {
+  color: #3d5f25;
+}
+.pawly-app.is-light .pawly-status-cancelled,
+.pawly-app.is-light .pawly-status-rejected,
+.pawly-app.is-light .pawly-status-no_show {
+  color: #8b3e43;
+}
+.pawly-app.is-light .pawly-status-in_progress {
+  color: #315b6b;
+}
+.pawly-app .pawly-modal-backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+.pawly-app.is-light .pawly-modal-backdrop {
+  background: rgba(28, 28, 28, 0.32);
+}
+.pawly-app .pawly-add-pet-backdrop {
+  background: rgba(0, 0, 0, 0.24);
+  backdrop-filter: none;
+}
+.pawly-app.is-light .pawly-add-pet-backdrop {
+  background: rgba(28, 28, 28, 0.12);
+}
+@media (max-width: 700px) {
+  .pawly-app .pawly-add-pet-backdrop {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: block;
+    overflow-y: auto;
+    padding: 0;
+    background: var(--pawly-bg);
+    backdrop-filter: none;
+  }
+  .pawly-app.is-light .pawly-add-pet-backdrop {
+    background: var(--pawly-bg);
+  }
+  .pawly-app .pawly-add-pet-modal {
+    display: flex;
+    width: 100%;
+    min-height: 100dvh;
+    max-height: none;
+    flex-direction: column;
+    overflow: visible;
+    padding: max(20px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 0;
+    background: var(--pawly-bg);
+    box-shadow: none;
+    color: var(--pawly-text);
+  }
+  .pawly-app .pawly-add-pet-modal > header {
+    margin: 0 0 24px;
+  }
+  .pawly-app .pawly-add-pet-close {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .pawly-app .pawly-add-pet-modal form {
+    flex: 1;
+    gap: 18px;
+  }
+  .pawly-app .pawly-add-pet-modal .pawly-modal-actions {
+    margin-top: auto;
+    padding-top: 28px;
+  }
+  .pawly-pet-photo-preview {
+    width: min(100%, 220px);
+    height: auto;
+    aspect-ratio: 1;
+  }
+  .pawly-admin-login {
+    display: flex;
+    height: auto;
+    min-height: 100dvh;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .pawly-admin-login-inner {
+    display: flex;
+    width: 100%;
+    min-height: 100dvh;
+    flex-direction: column;
+  }
+  .pawly-admin-login-image {
+    width: min(72%, 280px);
+    height: 190px;
+    min-height: 190px;
+  }
+  .pawly-admin-login-panel {
+    min-height: 70dvh;
+    padding: 20px 22px 28px;
+  }
+  .pawly-admin-login-content {
+    max-width: 440px;
+    margin: 36px auto auto;
+  }
+  .pawly-admin-dashboard-header {
+    padding: 0 16px;
+  }
+  .pawly-admin-layout {
+    flex-direction: column;
+  }
+  .pawly-admin-sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 12px 12px 9px;
+    border-right: 0;
+    border-bottom: 1px solid var(--pawly-border);
+  }
+  .pawly-admin-brand {
+    padding: 0 8px 8px;
+  }
+  .pawly-admin-sidebar-label,
+  .pawly-admin-sidebar-footer {
+    display: none;
+  }
+  .pawly-admin-sidebar nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+  }
+  .pawly-admin-sidebar nav button {
+    min-width: max-content;
+    min-height: 38px;
+    padding: 0 9px;
+  }
+  .pawly-admin-nav-index {
+    display: none;
+  }
+  .pawly-admin-main {
+    min-height: 0;
+    flex: 1;
+  }
+  .pawly-admin-topbar {
+    min-height: 48px;
+    padding: 0 16px;
+  }
+  .pawly-admin-content {
+    padding: 20px 16px 34px;
+  }
+  .pawly-admin-content .pawly-admin-heading {
+    flex-direction: column;
+  }
+  .pawly-admin-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pawly-admin-card-head {
+    flex-wrap: wrap;
+  }
+  .pawly-admin-reason,
+  .pawly-admin-request-status {
+    margin-left: 45px;
+  }
+  .pawly-admin-card > p {
+    margin-left: 0;
+  }
+  .pawly-admin-card-actions > button {
+    flex: 1;
+    padding: 0 7px;
+  }
+}
+@media (max-width: 480px) {
+  .pawly-admin-overview-grid {
+    grid-template-columns: 1fr;
+  }
+  .pawly-admin-top-role {
+    font-size: 14.5px;
+  }
+  .pawly-admin-content .pawly-admin-heading h1 {
+    font-size: 21px;
+  }
+  .pawly-admin-section-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.pawly-admin-overview-stack,
+.pawly-admin-section-stack {
+  @apply grid gap-5;
+}
+.pawly-admin-stats {
+  @apply grid-cols-1 gap-3;
+}
+.pawly-admin-cards-grid-2,
+.pawly-admin-cards-grid-3,
+.pawly-admin-card-grid {
+  @apply grid grid-cols-1 gap-4;
+}
+.pawly-admin-panel-card,
+.pawly-admin-action-card,
+.pawly-admin-form-card,
+.pawly-admin-filter-card,
+.pawly-admin-section-header-card,
+.pawly-project-card,
+.pawly-user-card,
+.pawly-verification-card,
+.pawly-report-card,
+.pawly-team-card {
+  @apply min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm;
+}
+.pawly-admin-action-card {
+  @apply flex flex-col gap-3;
+}
+.pawly-admin-action-card > svg {
+  @apply text-emerald-700;
+}
+.pawly-admin-action-card h3,
+.pawly-admin-panel-card h2 {
+  @apply text-base font-semibold text-slate-900;
+}
+.pawly-admin-action-card > p,
+.pawly-panel-card-head p {
+  @apply text-sm leading-6 text-slate-600;
+}
+.pawly-panel-card-head {
+  @apply mb-3 flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-4;
+}
+.pawly-panel-card-head h2 {
+  @apply m-0;
+}
+.pawly-panel-card-head p {
+  @apply mt-1;
+}
+.pawly-stat-card-head {
+  @apply flex min-h-8 items-start justify-between gap-3 text-sm font-medium text-slate-600;
+}
+.pawly-stat-card-head svg {
+  @apply shrink-0 text-slate-500;
+}
+.pawly-admin-stat-card {
+  @apply gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md;
+}
+.pawly-admin-stat-card > strong {
+  @apply text-3xl font-semibold tracking-tight text-slate-950;
+}
+.pawly-stat-card-foot {
+  @apply mt-auto flex flex-wrap items-center justify-between gap-2 text-xs leading-5 text-slate-500;
+}
+.pawly-stat-card-foot button {
+  @apply font-semibold text-slate-700;
+}
+.pawly-services-list {
+  @apply divide-y divide-slate-100;
+}
+.pawly-service-item-row {
+  @apply flex flex-col gap-3 py-4;
+}
+.pawly-service-item-info {
+  @apply flex min-w-0 items-start gap-3;
+}
+.pawly-service-item-info > div {
+  @apply min-w-0 flex-1;
+}
+.pawly-service-item-info strong {
+  @apply block text-sm font-semibold text-slate-900;
+}
+.pawly-service-item-info small {
+  @apply mt-1 block text-sm leading-5 text-slate-500;
+}
+.pawly-service-item-side {
+  @apply flex flex-wrap items-center gap-2 text-xs text-slate-500;
+}
+.pawly-quick-verify-list {
+  @apply grid gap-3;
+}
+.pawly-verify-item-card {
+  @apply rounded-lg border border-slate-200 bg-white p-4;
+}
+.pawly-verify-item-head {
+  @apply flex flex-wrap items-center justify-between gap-2;
+}
+.pawly-verify-item-card > p {
+  @apply mt-2 text-sm leading-5 text-slate-600;
+}
+.pawly-verify-actions {
+  @apply mt-3 flex flex-wrap justify-end gap-2;
+}
+.pawly-admin-page-header h1 {
+  @apply mt-2 text-2xl font-semibold tracking-tight text-slate-950;
+}
+.pawly-admin-page-header p {
+  @apply mt-2 max-w-3xl text-sm leading-6 text-slate-600;
+}
+.pawly-admin-role-switcher {
+  @apply flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700;
+}
+.pawly-admin-role-switcher select {
+  @apply border-0 bg-transparent text-slate-900;
+}
+
+@media (min-width: 640px) {
+  .pawly-admin-stats,
+  .pawly-admin-card-grid,
+  .pawly-admin-cards-grid-3 {
+    @apply grid-cols-2;
+  }
+  .pawly-service-item-row {
+    @apply flex-row items-center justify-between;
+  }
+}
+@media (min-width: 1024px) {
+  .pawly-admin-cards-grid-2 {
+    @apply grid-cols-2;
+  }
+}
+@media (min-width: 1280px) {
+  .pawly-admin-card-grid,
+  .pawly-admin-cards-grid-3 {
+    @apply grid-cols-3;
+  }
+  .pawly-admin-stats {
+    @apply grid-cols-4;
+  }
+}

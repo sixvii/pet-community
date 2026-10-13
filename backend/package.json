@@ -1,0 +1,14 @@
+{
+  "name": "pawly-backend",
+  "private": true,
+  "workspaces": [
+    "realtime-node"
+  ],
+  "scripts": {
+    "dev": "docker compose --env-file ./php-api/.env up --build mongodb php-api reminder-worker",
+    "dev:all": "docker compose --env-file ./php-api/.env up --build",
+    "dev:realtime": "npm run dev --workspace realtime-node",
+    "deploy:check": "node scripts/preflight-production.mjs",
+    "start": "npm run deploy:check && docker compose --env-file ./php-api/.env up --build -d"
+  }
+}
